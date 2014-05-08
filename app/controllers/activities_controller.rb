@@ -1,10 +1,11 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /activities
   # GET /activities.json
   def index
-    @activities = Activity.all
+    @activities = Activity.where(user_id: current_user.id)
   end
 
   # GET /activities/1
@@ -69,6 +70,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:title, :private, :polarity)
+      params.require(:activity).permit(:title, :private, :polarity, :user_id).merge(user_id: current_user.id)
     end
 end
