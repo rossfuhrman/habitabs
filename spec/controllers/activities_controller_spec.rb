@@ -168,6 +168,14 @@ describe ActivitiesController do
       }.to change(Activity, :count).by(-1)
     end
 
+    it "destroys the marks for the activity" do
+      Mark.create mark_date: Date.today, activity_id: @activity.id, count: 1
+
+      expect{
+        delete :destroy, {:id => @activity.to_param}
+      }.to change(Mark, :count).by(-1)
+    end
+
     it "redirects to the activities list" do
       delete :destroy, {:id => @activity.to_param}
       response.should redirect_to(activities_url)
