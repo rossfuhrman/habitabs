@@ -46,8 +46,8 @@
           dataType:'json',
           success:function(returned_value){
             if(returned_value) {
-              mark_count_div.fadeOut( "slow", function() {
-                $(this).text(returned_value).fadeIn( "slow", function() {
+              mark_count_div.fadeOut(1100, function() {
+                $(this).text(returned_value).fadeIn(1100, function() {
                   // Animation complete
                 })
                 // Animation complete.
