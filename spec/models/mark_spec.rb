@@ -23,5 +23,13 @@ describe Mark do
                       mark_date: Date.today + 1)
       expect(mark).to have(1).errors_on(:mark_date)
     end
+    it "knows what activity it belongs to" do
+      activity = Activity.new :title => "hey"
+      activity.user = FactoryGirl.create(:user)
+      activity.save!
+      mark = Mark.create( activity_id: activity.id,
+                      mark_date: Date.today + 1)
+      expect(mark.activity).should eq(activity)
+    end
   end
 end
