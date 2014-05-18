@@ -1,25 +1,35 @@
 <h1>Listing activities</h1>
+<h2><%= link_to "Previous Week ", activities_path(:end_date => @end_date_for_previous_link) %></h2>
+<% if @end_date_for_next_link %>
+  <h2><%= link_to "Next Week ", activities_path(:end_date => @end_date_for_next_link) %></h2>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Private</th>
-      <th>Polarity</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <% @dates_headers.each do |date_header| %>
+        <th> <%= date_header.html_safe %> </th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @activities.each do |activity| %>
       <tr>
-        <td><%= activity.title %></td>
-        <td><%= activity.private %></td>
-        <td><%= activity.polarity %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
+        <td><%= link_to activity.title, edit_activity_path(activity) %></td>
+        <% @dates.each do |date| %>
+          <td>
+            <br />
+            <div class="clueless" data-id="<%=activity.id %>" data-date="<%= date %>">
+              Click Here
+
+            </div>
+            <div class="count">
+              <%= activity.marks_on_date(date) %>
+            </div>
+          </td>
+        <% end %>
         <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Activities</title>
+  <title>Activities - Start good habits. Break bad habits. Track progress. </title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -33,4 +33,23 @@
 <%= yield %>
 
 </body>
+<script>
+  $(document).ready(function () {
+    $(".clueless").click(function () {
+      alert($(this).attr("data-id"));
+        $.ajax({
+          url:'/marks',
+          type:'post',
+          data:{ mark: {
+            activity_id: $(this).attr("data-id"),
+            mark_date: $(this).attr("data-date")}},
+          dataType:'json',
+          success:function(returned_value){
+            if(returned_value)
+            alert('true');
+          }
+        })
+    });
+  });
+</script>
 </html>
