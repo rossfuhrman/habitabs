@@ -36,7 +36,7 @@
 <script>
   $(document).ready(function () {
     $(".clueless").click(function () {
-      alert($(this).attr("data-id"));
+        var mark_count_div =  $(this).next("div") ;
         $.ajax({
           url:'/marks',
           type:'post',
@@ -45,8 +45,14 @@
             mark_date: $(this).attr("data-date")}},
           dataType:'json',
           success:function(returned_value){
-            if(returned_value)
-            alert('true');
+            if(returned_value) {
+              mark_count_div.fadeOut( "slow", function() {
+                $(this).text(returned_value).fadeIn( "slow", function() {
+                  // Animation complete
+                })
+                // Animation complete.
+              });
+            }
           }
         })
     });
