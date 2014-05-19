@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Activities - Start good habits. Break bad habits. Track progress. </title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "vendor/modernizr" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+  <nav data-topbar="" class="top-bar">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+    <h1>
+      <a href="/">
+        Activities 
+      </a>
+    </h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+  </ul>
+
+
+  <section class="top-bar-section">
+  <!-- Right Nav Section -->
+  <ul class="right">
   <% if user_signed_in? %>
-    <li id="fat-menu" class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      Account <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu">
+    <li class="divider"></li>
       <li><%= link_to "Profile", edit_user_registration_path %></li>
+      <li class="divider"></li>
       <li><%= link_to "Settings", '#' %></li>
       <li class="divider"></li>
       <li>
       <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
       </li>
-    </ul>
-    </li>
-    <li> <%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
   <% else %>
+    <li class="divider"></li>
     <li><%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-large btn-primary" %></li>
+    <li class="divider"></li>
     <li><%= link_to "Sign in", new_user_session_path %></li>
   <% end %>
+  </section></nav>
+
+
 
   <p class="notice"><%= notice %></p> 
   <p class="alert"><%= alert %></p>
 
 <%= yield %>
 
+  <%= javascript_include_tag "application" %>
 </body>
 <script>
   $(document).ready(function () {
