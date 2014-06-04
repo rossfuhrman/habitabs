@@ -1,41 +1,43 @@
-<h1>Listing activities</h1>
-<h2><%= link_to "Previous Week ", activities_path(:end_date => @end_date_for_previous_link) %></h2>
-<% if @end_date_for_next_link %>
-  <h2><%= link_to "Next Week ", activities_path(:end_date => @end_date_for_next_link) %></h2>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <% @dates_headers.each do |date_header| %>
-        <th> <%= date_header.html_safe %> </th>
-      <% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @activities.each do |activity| %>
-      <tr>
-        <td><%= link_to activity.title, edit_activity_path(activity) %></td>
-        <% @dates.each do |date| %>
-          <td>
-            <br />
-            <div class="clueless" data-id="<%=activity.id %>" data-date="<%= date %>">
-              Click Here
-
-            </div>
-            <div class="count">
-              <%= activity.marks_on_date(date) %>
-            </div>
-          </td>
-        <% end %>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row"> 
+  <div class="small-12 columns">
+    <h2><%= link_to "Previous Week ", activities_path(:end_date => @end_date_for_previous_link) %></h2>
+    <% if @end_date_for_next_link %>
+      <h2><%= link_to "Next Week ", activities_path(:end_date => @end_date_for_next_link) %></h2>
     <% end %>
-  </tbody>
-</table>
 
-<br>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <% @dates_headers.each do |date_header| %>
+            <th> <%= date_header.html_safe %> </th>
+          <% end %>
+        </tr>
+      </thead>
 
-<%= link_to 'New Activity', new_activity_path %>
+      <tbody>
+        <% @activities.each do |activity| %>
+          <tr>
+            <td><%= link_to activity.title, edit_activity_path(activity) %></td>
+            <% @dates.each do |date| %>
+              <td>
+                <br />
+                <div class="clueless" data-id="<%=activity.id %>" data-date="<%= date %>">
+                  Click Here
+
+                </div>
+                <div class="count">
+                  <%= activity.marks_on_date(date) %>
+                </div>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'Add an Activity', new_activity_path %>
+  </div>
+</div>
