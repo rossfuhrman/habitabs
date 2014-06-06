@@ -55,8 +55,34 @@
 </body>
 <script>
   $(document).ready(function () {
-    $(".clueless").click(function () {
+
+
+    $(".destroy_mark").click(function () {
         var mark_count_div =  $(this).next("div") ;
+        $.ajax({
+          url: "/marks/remove",
+          type: "post",
+          dataType: "json",
+          data: {"_method":"remove", mark: {
+            activity_id: $(this).attr("data-id"),
+            mark_date: $(this).attr("data-date")}},
+          dataType:'json',
+          success:function(returned_value){
+            //if(returned) {
+              mark_count_div.fadeOut(250, function() {
+                $(this).text(returned_value).fadeIn(1100, function() {
+                  // Animation complete
+                })
+                // Animation complete.
+              });
+            }
+          //}
+        });
+    });
+
+
+    $(".clueless").click(function () {
+        var mark_count_div =  $(this).next("div").next("div") ;
         $.ajax({
           url:'/marks',
           type:'post',
