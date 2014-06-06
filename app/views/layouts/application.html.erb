@@ -68,7 +68,10 @@
             mark_date: $(this).attr("data-date")}},
           dataType:'json',
           success:function(returned_value){
-            //if(returned) {
+            if(returned_value === 0){
+              returned_value = "";
+            }
+            //if(returned_value) {
               mark_count_div.fadeOut(250, function() {
                 $(this).text(returned_value).fadeIn(1100, function() {
                   // Animation complete
@@ -91,14 +94,14 @@
             mark_date: $(this).attr("data-date")}},
           dataType:'json',
           success:function(returned_value){
-            if(returned_value) {
+            //if(returned_value) {
               mark_count_div.fadeOut(250, function() {
                 $(this).text(returned_value).fadeIn(1100, function() {
                   // Animation complete
                 })
                 // Animation complete.
               });
-            }
+            //}
           }
         })
     });
