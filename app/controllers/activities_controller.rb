@@ -70,7 +70,7 @@ class ActivitiesController < ApplicationController
 
     def get_dates_to_display
       amount_to_display = 2
-      end_date = Date.today
+      end_date = Date.today.in_time_zone.to_date
 
       if params[:end_date]
         amount_to_display = 7
@@ -86,14 +86,14 @@ class ActivitiesController < ApplicationController
 
     def get_end_date_for_previous_week_link dates
       if dates.count == 2
-        Date.today
+        Date.today.in_time_zone.to_date
       else
         dates.last.to_date - 7
       end
     end
 
     def get_end_date_for_next_link dates
-      if dates.last == Date.today
+      if dates.last == Date.today.in_time_zone.to_date
         nil
       else
         dates.last + 7
