@@ -22,15 +22,17 @@
             <% @dates.each do |date| %>
               <td>
                 <br />
-                <div class="add_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
-                Add Mark
+                <div style="float:left;" class="add_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
+                  <i class="general fi-plus">
+                  </i>
 
                 </div>
-                <div class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
-                  Remove Mark
+                <div style="float:right; " class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
+                  <i class="general fi-minus">
+                  </i>
                 </div>
                 <div class="count">
-                  <%= activity.marks_on_date(date) %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= activity.marks_on_date(date) %>
                 </div>
               </td>
             <% end %>
