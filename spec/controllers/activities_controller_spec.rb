@@ -64,19 +64,19 @@ describe ActivitiesController do
 
     it "sets @dates to yesterday and today if no params are passed" do
       get :index, {}
-      assigns(:dates).should eq([Date.today - 1, Date.today])
+      assigns(:dates).should eq([Time.current.to_date - 1, Time.current.to_date])
     end
 
     it "sets @dates_headers to yesterday and today if no params are passed" do
       get :index, {}
       assigns(:dates_headers).should eq([
-          "#{(Date.today - 1).strftime("%A")}<br />#{Date.today - 1}",
-          "#{(Date.today).strftime("%A")}<br />#{Date.today}"])
+          "#{(Time.current.to_date - 1).strftime("%A")}<br />#{Time.current.to_date - 1}",
+          "#{(Time.current.to_date).strftime("%A")}<br />#{Time.current.to_date}"])
     end
 
     it "sets @end_date_for_previous_link to today if no params are passed" do
       get :index, {}
-      assigns(:end_date_for_previous_link).should eq(Date.today)
+      assigns(:end_date_for_previous_link).should eq(Time.current.to_date)
     end
 
     it "leaves @end_date_for_next_link empty if today is the last day of @dates" do
@@ -86,7 +86,7 @@ describe ActivitiesController do
 
 
     it "sets @dates_headers to 7 days ending with params[:end_date]" do
-      end_date = Date.today
+      end_date = Time.current.to_date
       get :index, {:end_date => end_date}
       assigns(:dates_headers).should eq([
           "#{(end_date - 6).strftime("%A")}<br />#{end_date - 6}",
@@ -99,19 +99,19 @@ describe ActivitiesController do
     end
 
     it "sets @end_date_for_previous_link to 7 days before last @dates value if params are passed" do
-      end_date = Date.today
+      end_date = Time.current.to_date
       get :index, {:end_date => end_date}
-      assigns(:end_date_for_previous_link).should eq(Date.today - 7)
+      assigns(:end_date_for_previous_link).should eq(Time.current.to_date - 7)
     end
 
     it "sets @end_date_for_next_link if today is not the last day of @dates" do
-      end_date = Date.today - 7
+      end_date = Time.current.to_date - 7
       get :index, {:end_date => end_date}
       assigns(:end_date_for_next_link).should eq(end_date + 7)
     end
 
     it "sets @end_date_for_next_link if today is not the last day of @dates" do
-      end_date = Date.today - 14
+      end_date = Time.current.to_date - 14
       get :index, {:end_date => end_date}
       assigns(:end_date_for_next_link).should eq(end_date + 7 )
     end
@@ -225,7 +225,7 @@ describe ActivitiesController do
     end
 
     it "destroys the marks for the activity" do
-      Mark.create mark_date: Date.today, activity_id: @activity.id, count: 1
+      Mark.create mark_date: Time.current.to_date, activity_id: @activity.id, count: 1
 
       expect{
         delete :destroy, {:id => @activity.to_param}
