@@ -19,10 +19,15 @@
     <%= f.label :private %><br>
     <%= f.check_box :private %>
   </div>
-  <div class="field">
-    <%= f.label :polarity %><br>
-    <%= f.text_field :polarity %>
-  </div>
+
+
+  <%= f.radio_button :polarity, Activity::NEUTRAL  %> 
+  <%= label :polarity, "Neutral" %>
+  <%= f.radio_button :polarity, Activity::POSITIVE %>
+  <%= label :polarity, "+ Positive" %>
+  <%= f.radio_button :polarity, Activity::NEGATIVE %>
+  <%= label :polarity, "- Negative" %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

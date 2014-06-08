@@ -9,4 +9,19 @@ class Activity < ActiveRecord::Base
     #then the javascript doesn't work and the page isn't updated
     #so I am doing that conversion in the js
   end
+
+  NEUTRAL = 0
+  POSITIVE = 1
+  NEGATIVE = 2
+
+  def polarity_class
+    if polarity == POSITIVE
+      "positive"
+    elsif polarity == NEGATIVE
+      "negative"
+    else
+      "neutral"
+    end
+  end
+
 end
