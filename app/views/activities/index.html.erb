@@ -18,7 +18,11 @@
       <tbody>
         <% @activities.each do |activity| %>
           <tr>
-            <td><%= link_to activity.title, edit_activity_path(activity) %></td>
+            <td > 
+              <div  class="<%=activity.polarity_class %>">
+                <%= link_to activity.title, edit_activity_path(activity) %>
+              </div>
+            </td>
             <% @dates.each do |date| %>
               <td>
                 <br />

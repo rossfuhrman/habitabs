@@ -2,3 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'foundation-icons';
+.positive {
+  background-color:green;
+}
+.positive a{
+  color:black;
+}
+.negative {
+  background-color:red;
+}
+.negative a{
+  color:black;
+}
