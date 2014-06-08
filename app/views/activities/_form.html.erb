@@ -16,14 +16,20 @@
     <%= f.text_field :title %>
   </div>
 
-  <%= f.radio_button :polarity, Activity::NEUTRAL  %> 
-  <%= label :polarity, "Neutral" %>
-  <%= f.radio_button :polarity, Activity::POSITIVE %>
-  <%= label :polarity, "+ Positive" %>
-  <%= f.radio_button :polarity, Activity::NEGATIVE %>
-  <%= label :polarity, "- Negative" %>
+  <div class="field">
+    <%= f.label "This is activity is:" %><br>
+    <%= f.radio_button :polarity, Activity::NEUTRAL  %> 
+    <%= label :polarity, "Neutral" %>
+    <%= f.radio_button :polarity, Activity::POSITIVE %>
+    <%= label :polarity, "+ Positive" %>
+    <%= f.radio_button :polarity, Activity::NEGATIVE %>
+    <%= label :polarity, "- Negative" %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  <br />
+
 <% end %>
