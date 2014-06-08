@@ -17,13 +17,13 @@
   </div>
 
   <div class="field">
-    <%= f.label "This is activity is:" %><br>
+    <label>This is activity is: </label><br>
     <%= f.radio_button :polarity, Activity::NEUTRAL  %> 
-    <%= label :polarity, "Neutral" %>
+    <label>Neutral</label>
     <%= f.radio_button :polarity, Activity::POSITIVE %>
-    <%= label :polarity, "+ Positive" %>
+    <label>+ Positive</label>
     <%= f.radio_button :polarity, Activity::NEGATIVE %>
-    <%= label :polarity, "- Negative" %>
+    <label>- Negative</label>
   </div>
 
   <div class="actions">
