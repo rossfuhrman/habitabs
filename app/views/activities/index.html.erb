@@ -43,6 +43,14 @@
           </tr>
         <% end %>
       </tbody>
+      <tfoot>
+        <tr>
+          <th>Title</th>
+          <% @dates_headers.each do |date_header| %>
+            <th> <%= date_header.html_safe %> </th>
+          <% end %>
+        </tr>
+      </tfoot>
     </table>
 
     <br>
