@@ -3,11 +3,12 @@ class Activity < ActiveRecord::Base
   belongs_to :user
   has_many :marks , :dependent => :destroy
   def marks_on_date date
-    marks.where(:mark_date => date).count
-    #this should probably not return anything if the count is zero
-    #if I make it return an empty string for 0,
-    #then the javascript doesn't work and the page isn't updated
-    #so I am doing that conversion in the js
+    count = marks.where(:mark_date => date).count
+    if count == 0
+      ""
+    else
+      count
+    end
   end
 
   NEUTRAL = 0
