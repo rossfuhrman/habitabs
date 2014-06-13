@@ -56,7 +56,6 @@
 <script>
   $(document).ready(function () {
 
-
     $(".destroy_mark").click(function () {
       $(this).fadeOut(250, function() {
         $(this).fadeIn(500, function() {
@@ -64,7 +63,9 @@
         })
         // Animation complete.
       });
-        var mark_count_div =  $(this).next("div") ;
+        var activity_id = $(this).attr("data-id");
+        var mark_date = $(this).attr("data-date");
+        var mark_count_div = $('[id=' + String(activity_id) + String(mark_date) + ']');
         $.ajax({
           url: "/marks/remove",
           type: "post",
@@ -97,13 +98,16 @@
         })
         // Animation complete.
       });
-        var mark_count_div =  $(this).next("div").next("div") ;
+        var activity_id = $(this).attr("data-id");
+        var mark_date = $(this).attr("data-date");
+        //var mark_count_div = $("#" + String(activity_id) + String(mark_date));
+        var mark_count_div = $('[id=' + String(activity_id) + String(mark_date) + ']');
         $.ajax({
           url:'/marks',
           type:'post',
           data:{ mark: {
-            activity_id: $(this).attr("data-id"),
-            mark_date: $(this).attr("data-date")}},
+            activity_id: activity_id,
+            mark_date: mark_date}},
           dataType:'json',
           success:function(returned_value){
             //if(returned_value) {

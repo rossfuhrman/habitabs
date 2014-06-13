@@ -5,67 +5,109 @@
       <h2><%= link_to "Next Week ", activities_path(:end_date => @end_date_for_next_link) %></h2>
     <% end %>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <% @dates_headers.each do |date_header| %>
-            <th> <%= date_header.html_safe %> </th>
-          <% end %>
-        </tr>
-      </thead>
 
-      <tbody>
-        <% @activities.each do |activity| %>
-          <tr>
-            <td > 
-              <div  class="<%=activity.polarity_class %>">
-                <%= link_to activity.title, edit_activity_path(activity) %>
+
+    <div class="show-for-small-only">
+      <dl class="accordion" data-accordion>
+
+        <% active = "active" %>
+        <% @dates.reverse.each do |date| %>
+          <dd>
+          <a href="#panel<%=date.amjd.to_i%>"><%= date %></a>
+          <div id="panel<%=date.amjd.to_i%>" class="content <%= active %>">
+            <% @activities.each do |activity| %>
+
+              <div class="row">
+                <div class="small-4 large-4 columns">
+                  <div  class="<%=activity.polarity_class %>">
+                    <%= link_to activity.title, edit_activity_path(activity) %>
+                  </div>
+                </div>
+                <div class="small-3 large-4 columns">
+                  <div style=" " class="add_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
+                    <i class="general fi-plus">
+                    </i>
+
+                  </div>
+                </div>
+                <div class="small-2 large-2 columns">
+                  <div class="count" id="<%="#{activity.id}#{date}"%>"> 
+                    <%= activity.marks_on_date(date) %>
+                  </div>
+                </div>
+                <div class="small-3 large-2 columns">
+                  <div style="" class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
+                    <i class="general fi-minus">
+                    </i>
+                  </div>
+                </div>
               </div>
-            </td>
-            <% @dates.each do |date| %>
-              <td>
-                <br />
-                <div style="float:left; width:32px; " class="add_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
-                  <i class="general fi-plus">
-                  </i>
 
-                </div>
-                <div style="float:right; " class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
-                  <i class="general fi-minus">
-                  </i>
-                </div>
-                <div class="count">
-                  <%= activity.marks_on_date(date) %>
-                </div>
-              </td>
+
+            <% end %>
+          </div>
+          </dd>
+          <% active = "" %>
+        <% end %>
+
+
+      </dl>
+
+    </div> 
+    <div class="show-for-medium-up">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <% @dates_headers.each do |date_header| %>
+              <th> <%= date_header.html_safe %> </th>
             <% end %>
           </tr>
-        <% end %>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th>Title</th>
-          <% @dates_headers.each do |date_header| %>
-            <th> <%= date_header.html_safe %> </th>
+        </thead>
+
+        <tbody>
+          <% @activities.each do |activity| %>
+            <tr>
+              <td > 
+                <div  class="<%=activity.polarity_class %>">
+                  <%= link_to activity.title, edit_activity_path(activity) %>
+                </div>
+              </td>
+              <% @dates.each do |date| %>
+                <td>
+                  <br />
+                  <div style="float:left; width:32px; " class="add_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
+                    <i class="general fi-plus">
+                    </i>
+
+                  </div>
+                  <div style="float:right; " class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
+                    <i class="general fi-minus">
+                    </i>
+                  </div>
+                  <div class="count" id="<%="#{activity.id}#{date}"%>"> 
+                    <%= activity.marks_on_date(date) %>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
           <% end %>
-        </tr>
-      </tfoot>
-    </table>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Title</th>
+            <% @dates_headers.each do |date_header| %>
+              <th> <%= date_header.html_safe %> </th>
+            <% end %>
+          </tr>
+        </tfoot>
+      </table>
+    </div>  
 
     <br>
 
     <p>
     <%= link_to 'Add an Activity', new_activity_path %>
     </p>
-
-    <div class="show-for-small-only">
-      This text is shown only on a small screen.
-      Need to figure out how to take advantage of this to display diff links and just two days
-    </div> 
-    <div class="show-for-medium-up">
-      This text is shown on medium screens and up. This will basically be the same as what is already on the page.
-    </div>  
-
   </div>
 </div>
