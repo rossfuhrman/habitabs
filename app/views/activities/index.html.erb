@@ -1,8 +1,8 @@
 <div class="row"> 
   <div class="small-12 columns">
-    <h2><%= link_to "Previous Week ", activities_path(:end_date => @end_date_for_previous_link) %></h2>
-    <% if @end_date_for_next_link %>
-      <h2><%= link_to "Next Week ", activities_path(:end_date => @end_date_for_next_link) %></h2>
+    <h2><%= link_to "Previous Week ", activities_path(:start_date => @start_date_for_previous_link) %></h2>
+    <% if @start_date_for_next_link %>
+      <h2><%= link_to "Next Week ", activities_path(:start_date => @start_date_for_next_link) %></h2>
     <% end %>
 
 
@@ -11,41 +11,43 @@
       <dl class="accordion" data-accordion>
 
         <% active = "active" %>
-        <% @dates.reverse.each do |date| %>
+        <% @date_range.days.reverse.each do |day| %>
           <dd>
-          <a href="#panel<%=date.amjd.to_i%>"><%= date %></a>
-          <div id="panel<%=date.amjd.to_i%>" class="content <%= active %>">
-            <% @activities.each do |activity| %>
+            <% unless day.in_the_future? %>
+              <a href="#panel<%=day.date.amjd.to_i%>"><%= "#{day.day_of_week}, #{day.date}" %></a>
+              <div id="panel<%=day.date.amjd.to_i%>" class="content <%= active %>">
+                <% @activities.each do |activity| %>
 
-              <div class="row">
-                <div class="small-4 large-4 columns">
-                  <div  class="<%=activity.polarity_class %>">
-                    <%= link_to activity.title, edit_activity_path(activity) %>
-                  </div>
-                </div>
-                <div class="small-3 large-4 columns">
-                  <div style=" " class="add_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
-                    <i class="general fi-plus">
-                    </i>
+                  <div class="row">
+                    <div class="small-4 large-4 columns">
+                      <div  class="<%=activity.polarity_class %>">
+                        <%= link_to activity.title, edit_activity_path(activity) %>
+                      </div>
+                    </div>
+                    <div class="small-3 large-4 columns">
+                      <div style=" " class="add_mark" data-id="<%=activity.id %>" data-date="<%= day.date %>">
+                        <i class="general fi-plus">
+                        </i>
 
+                      </div>
+                    </div>
+                    <div class="small-2 large-2 columns">
+                      <div class="count" id="<%="#{activity.id}#{day.date}"%>"> 
+                        <%= activity.marks_on_date(day.date) %>
+                      </div>
+                    </div>
+                    <div class="small-3 large-2 columns">
+                      <div style="" class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= day.date %>">
+                        <i class="general fi-minus">
+                        </i>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="small-2 large-2 columns">
-                  <div class="count" id="<%="#{activity.id}#{date}"%>"> 
-                    <%= activity.marks_on_date(date) %>
-                  </div>
-                </div>
-                <div class="small-3 large-2 columns">
-                  <div style="" class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
-                    <i class="general fi-minus">
-                    </i>
-                  </div>
-                </div>
+
+
+                <% end %>
               </div>
-
-
             <% end %>
-          </div>
           </dd>
           <% active = "" %>
         <% end %>
@@ -59,8 +61,12 @@
         <thead>
           <tr>
             <th>Title</th>
-            <% @dates_headers.each do |date_header| %>
-              <th> <%= date_header.html_safe %> </th>
+            <% @date_range.days.each do |day| %>
+              <th> 
+                <%= day.day_of_week %>
+                <br />
+                <%= day.date.to_date %>
+              </th>
             <% end %>
           </tr>
         </thead>
@@ -73,21 +79,24 @@
                   <%= link_to activity.title, edit_activity_path(activity) %>
                 </div>
               </td>
-              <% @dates.each do |date| %>
+              <% @date_range.days.each do |day| %>
                 <td>
-                  <br />
-                  <div style="float:left; width:32px; " class="add_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
-                    <i class="general fi-plus">
-                    </i>
+                
+                  <% unless day.in_the_future? %>
+                    <br />
+                    <div style="float:left; width:32px; " class="add_mark" data-id="<%=activity.id %>" data-date="<%= day.date %>">
+                      <i class="general fi-plus">
+                      </i>
 
-                  </div>
-                  <div style="float:right; " class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= date %>">
-                    <i class="general fi-minus">
-                    </i>
-                  </div>
-                  <div class="count" id="<%="#{activity.id}#{date}"%>"> 
-                    <%= activity.marks_on_date(date) %>
-                  </div>
+                    </div>
+                    <div style="float:right; " class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= day.date %>">
+                      <i class="general fi-minus">
+                      </i>
+                    </div>
+                    <div class="count" id="<%="#{activity.id}#{day.date}"%>"> 
+                      <%= activity.marks_on_date(day.date) %>
+                    </div>
+                  <% end %>
                 </td>
               <% end %>
             </tr>
@@ -96,8 +105,8 @@
         <tfoot>
           <tr>
             <th>Title</th>
-            <% @dates_headers.each do |date_header| %>
-              <th> <%= date_header.html_safe %> </th>
+            <% @date_range.days.each do |day| %>
+              <th> <%= day.date.to_date %> </th>
             <% end %>
           </tr>
         </tfoot>
