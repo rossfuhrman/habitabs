@@ -62,58 +62,37 @@ describe ActivitiesController do
       assigns(:activities).should eq([@activity])
     end
 
-    it "sets @dates to yesterday and today if no params are passed" do
+    it "sets @date_range if no params are passed" do
       get :index, {}
-      assigns(:dates).should eq([Time.current.to_date - 1, Time.current.to_date])
+      assigns(:date_range).should be_a(DateRange)
     end
 
-    it "sets @dates_headers to yesterday and today if no params are passed" do
+    it "sets @start_date_for_previous_link to today if no params are passed" do
       get :index, {}
-      assigns(:dates_headers).should eq([
-          "#{(Time.current.to_date - 1).strftime("%A")}<br />#{Time.current.to_date - 1}",
-          "#{(Time.current.to_date).strftime("%A")}<br />#{Time.current.to_date}"])
+      assigns(:start_date_for_previous_link).should_not be_nil
     end
 
-    it "sets @end_date_for_previous_link to today if no params are passed" do
+    it "leaves @start_date_for_next_link empty if today is the last day of @date_range" do
       get :index, {}
-      assigns(:end_date_for_previous_link).should eq(Time.current.to_date)
+      assigns(:start_date_for_next_link).should eq(nil)
     end
 
-    it "leaves @end_date_for_next_link empty if today is the last day of @dates" do
-      get :index, {}
-      assigns(:end_date_for_next_link).should eq(nil)
+    it "sets @start_date_for_previous_link to 7 days before last @date_range value if params are passed" do
+      start_date = Time.current.to_date
+      get :index, {:start_date => start_date}
+      assigns(:start_date_for_previous_link).should_not be_nil
     end
 
-
-    it "sets @dates_headers to 7 days ending with params[:end_date]" do
-      end_date = Time.current.to_date
-      get :index, {:end_date => end_date}
-      assigns(:dates_headers).should eq([
-          "#{(end_date - 6).strftime("%A")}<br />#{end_date - 6}",
-          "#{(end_date - 5).strftime("%A")}<br />#{end_date - 5}",
-          "#{(end_date - 4).strftime("%A")}<br />#{end_date - 4}",
-          "#{(end_date - 3).strftime("%A")}<br />#{end_date - 3}",
-          "#{(end_date - 2).strftime("%A")}<br />#{end_date - 2}",
-          "#{(end_date - 1).strftime("%A")}<br />#{end_date - 1}",
-          "#{(end_date).strftime("%A")}<br />#{end_date}" ])
+    it "sets @start_date_for_next_link if :start_date is in the week prior to this one " do
+      start_date = Time.current.to_date - 7
+      get :index, {:start_date => start_date}
+      assigns(:start_date_for_next_link).should_not be_nil
     end
 
-    it "sets @end_date_for_previous_link to 7 days before last @dates value if params are passed" do
-      end_date = Time.current.to_date
-      get :index, {:end_date => end_date}
-      assigns(:end_date_for_previous_link).should eq(Time.current.to_date - 7)
-    end
-
-    it "sets @end_date_for_next_link if today is not the last day of @dates" do
-      end_date = Time.current.to_date - 7
-      get :index, {:end_date => end_date}
-      assigns(:end_date_for_next_link).should eq(end_date + 7)
-    end
-
-    it "sets @end_date_for_next_link if today is not the last day of @dates" do
-      end_date = Time.current.to_date - 14
-      get :index, {:end_date => end_date}
-      assigns(:end_date_for_next_link).should eq(end_date + 7 )
+    it "sets @start_date_for_next_link if :start_date is two weeks prior to this one " do
+      start_date = Time.current.to_date - 14
+      get :index, {:start_date => start_date}
+      assigns(:start_date_for_next_link).should_not be_nil
     end
 
   end

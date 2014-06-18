@@ -6,10 +6,9 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     @activities = Activity.where(user_id: current_user.id)
-    @dates = get_dates_to_display
-    @dates_headers = get_dates_header @dates
-    @end_date_for_previous_link = get_end_date_for_previous_week_link @dates
-    @end_date_for_next_link = get_end_date_for_next_link @dates
+    @date_range = get_date_range
+    @start_date_for_previous_link = get_start_date_for_previous_week_link @date_range
+    @start_date_for_next_link = get_start_date_for_next_link @date_range
   end
 
   # GET /activities/1
@@ -68,36 +67,21 @@ class ActivitiesController < ApplicationController
 
   private
 
-    def get_dates_to_display
-      amount_to_display = 2
-      end_date = Time.current.to_date
+    def get_date_range
 
-      if params[:end_date]
-        amount_to_display = 7
-        end_date = params[:end_date].to_date
-      end
-
-      (0..amount_to_display - 1).each.collect{ |i| end_date - i }.reverse
-    end
-
-    def get_dates_header dates
-      dates.each.map { |date| "#{date.strftime("%A")}<br />#{date}" }
-    end
-
-    def get_end_date_for_previous_week_link dates
-      if dates.count == 2
-        Time.current.to_date
+      if params[:start_date]
+        DateRange.new(params[:start_date].to_date)
       else
-        dates.last.to_date - 7
+        DateRange.new
       end
     end
 
-    def get_end_date_for_next_link dates
-      if dates.last == Time.current.to_date
-        nil
-      else
-        dates.last + 7
-      end
+    def get_start_date_for_previous_week_link date_range
+      date_range.previous_week_start_date
+    end
+
+    def get_start_date_for_next_link date_range
+      date_range.next_week_start_date
     end
 
     # Use callbacks to share common setup or constraints between actions.
