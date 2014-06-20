@@ -1,7 +1,7 @@
 <%= form_for(@activity) do |f| %>
   <% if @activity.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this habit from being saved:</h2>
 
       <ul>
       <% @activity.errors.full_messages.each do |msg| %>
@@ -17,7 +17,7 @@
   </div>
 
   <div class="field">
-    <label>This is activity is: </label><br>
+    <label>This is habit is: </label><br>
     <%= f.radio_button :polarity, Activity::NEUTRAL  %> 
     <label>Neutral</label>
     <%= f.radio_button :polarity, Activity::POSITIVE %>
@@ -27,7 +27,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Update" %>
   </div>
 
   <br />

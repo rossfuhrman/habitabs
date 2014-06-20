@@ -21,7 +21,7 @@
                   <div class="row">
                     <div class="small-4 large-4 columns">
                       <div  class="<%=activity.polarity_class %>">
-                        <%= link_to activity.title, edit_activity_path(activity) %>
+                        <%= link_to activity.title, activity %>
                       </div>
                     </div>
                     <div class="small-3 large-4 columns">
@@ -76,7 +76,7 @@
             <tr>
               <td > 
                 <div  class="<%=activity.polarity_class %>">
-                  <%= link_to activity.title, edit_activity_path(activity) %>
+                  <%= link_to activity.title, activity %>
                 </div>
               </td>
               <% @date_range.days.each do |day| %>
@@ -116,7 +116,7 @@
     <br>
 
     <p>
-    <%= link_to 'Add an Activity', new_activity_path %>
+    <%= link_to 'Add a Habit', new_activity_path %>
     </p>
   </div>
 </div>
