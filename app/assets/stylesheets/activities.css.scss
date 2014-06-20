@@ -8,6 +8,8 @@
 .positive a{
   padding: 2px;
   color:white;
+  padding: 15px 4px;
+  display: block;
 }
 .negative {
   background-color:red;
@@ -15,4 +17,18 @@
 .negative a{
   padding: 2px;
   color:white;
+  padding: 15px 4px;
+  display: block;
+}
+.neutral a{
+  padding: 15px 4px;
+  display: block;
+}
+td .count{
+  font-size: 1.875rem;
+}
+.general{
+  padding: 10px 0px;
+  display: block;
+  cursor: pointer;
 }
