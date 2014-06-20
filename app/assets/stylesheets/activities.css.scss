@@ -27,6 +27,12 @@
 td .count{
   font-size: 1.875rem;
 }
+td .positive-count {
+  color: green;
+}
+td .negative-count {
+  color: red;
+}
 .general{
   padding: 10px 0px;
   display: block;

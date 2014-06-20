@@ -32,7 +32,7 @@
                       </div>
                     </div>
                     <div class="small-2 large-2 columns">
-                      <div class="count" id="<%="#{activity.id}#{day.date}"%>"> 
+                      <div class="count <%=activity.polarity_class %>-count" id="<%="#{activity.id}#{day.date}"%>"> 
                         <%= activity.marks_on_date(day.date) %>
                       </div>
                     </div>
@@ -93,7 +93,7 @@
                       <i class="general fi-minus">
                       </i>
                     </div>
-                    <div class="count" id="<%="#{activity.id}#{day.date}"%>"> 
+                    <div class="count <%=activity.polarity_class %>-count" id="<%="#{activity.id}#{day.date}"%>"> 
                       <%= activity.marks_on_date(day.date) %>
                     </div>
                   <% end %>
