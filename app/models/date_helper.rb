@@ -10,10 +10,10 @@ class DateHelper
     date.strftime
   end
   def is_today?
-    date == Date.today
+    date == Time.current.to_date 
   end
   def in_the_future?
-    date > Date.today
+    date > Time.current.to_date
   end
   def display_class
     return "today" if is_today?
