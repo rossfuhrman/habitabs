@@ -17,13 +17,18 @@
   </div>
 
   <div class="field">
-    <label>This is habit is: </label><br>
+    <label>This habit is: </label><br>
     <%= f.radio_button :polarity, Activity::NEUTRAL  %> 
     <label>Neutral</label>
     <%= f.radio_button :polarity, Activity::POSITIVE %>
     <label>+ Positive</label>
     <%= f.radio_button :polarity, Activity::NEGATIVE %>
     <label>- Negative</label>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
   </div>
 
   <div class="actions">

@@ -91,6 +91,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:title, :private, :polarity, :user_id).merge(user_id: current_user.id)
+      params.require(:activity).permit(:title, :private, :polarity, :description, :user_id).merge(user_id: current_user.id)
     end
 end
