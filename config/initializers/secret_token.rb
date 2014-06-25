@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Activities::Application.config.secret_key_base = '00e19a3937377551e2480798c99c598050b2d7f078f86745d50fdc297ffb93bf91fd5b5c6841e8f225b3fee227165be129bfad473f06ca5d2f5520f5fbceb27a'
+Habits::Application.config.secret_key_base = '00e19a3937377551e2480798c99c598050b2d7f078f86745d50fdc297ffb93bf91fd5b5c6841e8f225b3fee227165be129bfad473f06ca5d2f5520f5fbceb27a'

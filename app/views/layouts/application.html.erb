@@ -63,15 +63,15 @@
         })
         // Animation complete.
       });
-        var activity_id = $(this).attr("data-id");
+        var habit_id = $(this).attr("data-id");
         var mark_date = $(this).attr("data-date");
-        var mark_count_div = $('[id=' + String(activity_id) + String(mark_date) + ']');
+        var mark_count_div = $('[id=' + String(habit_id) + String(mark_date) + ']');
         $.ajax({
           url: "/marks/remove",
           type: "post",
           dataType: "json",
           data: {"_method":"remove", mark: {
-            activity_id: $(this).attr("data-id"),
+            habit_id: $(this).attr("data-id"),
             mark_date: $(this).attr("data-date")}},
           dataType:'html',
           success:function(returned_value){
@@ -98,15 +98,15 @@
         })
         // Animation complete.
       });
-        var activity_id = $(this).attr("data-id");
+        var habit_id = $(this).attr("data-id");
         var mark_date = $(this).attr("data-date");
-        //var mark_count_div = $("#" + String(activity_id) + String(mark_date));
-        var mark_count_div = $('[id=' + String(activity_id) + String(mark_date) + ']');
+        //var mark_count_div = $("#" + String(habit_id) + String(mark_date));
+        var mark_count_div = $('[id=' + String(habit_id) + String(mark_date) + ']');
         $.ajax({
           url:'/marks',
           type:'post',
           data:{ mark: {
-            activity_id: activity_id,
+            habit_id: habit_id,
             mark_date: mark_date}},
           dataType:'json',
           success:function(returned_value){

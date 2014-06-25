@@ -1,13 +1,13 @@
 require 'spec_helper'
 describe MarksController do
   login_user
-  let(:valid_attributes) { { mark_date: Date.today, activity_id: 1} }
+  let(:valid_attributes) { { mark_date: Date.today, habit_id: 1} }
 
   before(:each) do
-      @activity = Activity.new :title => "hey"
-      @activity.user = subject.current_user
-      @activity.save
-      #activity = FactoryGirl.create(:activity)
+      @habit = Habit.new :title => "hey"
+      @habit.user = subject.current_user
+      @habit.save
+      #habit = FactoryGirl.create(:habit)
   end
 
   describe "POST create" do

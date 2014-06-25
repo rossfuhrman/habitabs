@@ -9,5 +9,5 @@ end
 class Mark < ActiveRecord::Base
   includes ActiveModel::Validations
   validates_with MarkValidator
-  belongs_to :activity 
+  belongs_to :habit 
 end

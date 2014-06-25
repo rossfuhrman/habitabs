@@ -1,14 +1,14 @@
-Activities::Application.routes.draw do
+Habits::Application.routes.draw do
   devise_for :admins
   devise_for :users
-  resources :activities
+  resources :habits
   resources :marks
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'activities#index'
+  root 'habits#index'
 
   match '/marks/remove', to: 'marks#remove', via: [:post]
 

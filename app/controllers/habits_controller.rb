@@ -1,66 +1,66 @@
-class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:show, :edit, :update, :destroy]
+class HabitsController < ApplicationController
+  before_action :set_habit, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  # GET /activities
-  # GET /activities.json
+  # GET /habits
+  # GET /habits.json
   def index
-    @activities = Activity.where(user_id: current_user.id)
+    @habits = Habit.where(user_id: current_user.id)
     @date_range = get_date_range
     @start_date_for_previous_link = get_start_date_for_previous_week_link @date_range
     @start_date_for_next_link = get_start_date_for_next_link @date_range
   end
 
-  # GET /activities/1
-  # GET /activities/1.json
+  # GET /habits/1
+  # GET /habits/1.json
   def show
   end
 
-  # GET /activities/new
+  # GET /habits/new
   def new
-    @activity = Activity.new
+    @habit = Habit.new
   end
 
-  # GET /activities/1/edit
+  # GET /habits/1/edit
   def edit
   end
 
-  # POST /activities
-  # POST /activities.json
+  # POST /habits
+  # POST /habits.json
   def create
-    @activity = Activity.new(activity_params)
+    @habit = Habit.new(habit_params)
 
     respond_to do |format|
-      if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @activity }
+      if @habit.save
+        format.html { redirect_to @habit, notice: 'Habit was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @habit }
       else
         format.html { render action: 'new' }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
+        format.json { render json: @habit.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /activities/1
-  # PATCH/PUT /activities/1.json
+  # PATCH/PUT /habits/1
+  # PATCH/PUT /habits/1.json
   def update
     respond_to do |format|
-      if @activity.update(activity_params)
-        format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
+      if @habit.update(habit_params)
+        format.html { redirect_to @habit, notice: 'Habit was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
+        format.json { render json: @habit.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /activities/1
-  # DELETE /activities/1.json
+  # DELETE /habits/1
+  # DELETE /habits/1.json
   def destroy
-    @activity.destroy
+    @habit.destroy
     respond_to do |format|
-      format.html { redirect_to activities_url }
+      format.html { redirect_to habits_url }
       format.json { head :no_content }
     end
   end
@@ -85,12 +85,12 @@ class ActivitiesController < ApplicationController
     end
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_activity
-      @activity = Activity.find(params[:id])
+    def set_habit
+      @habit = Habit.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def activity_params
-      params.require(:activity).permit(:title, :private, :polarity, :description, :user_id).merge(user_id: current_user.id)
+    def habit_params
+      params.require(:habit).permit(:title, :private, :polarity, :description, :user_id).merge(user_id: current_user.id)
     end
 end

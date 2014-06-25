@@ -2,25 +2,25 @@
   <div class="small-12 columns">
     <p>
     <strong>Title:</strong>
-    <%= @activity.title %>
+    <%= @habit.title %>
     </p>
 
     <p>
     <strong>Polarity:</strong>
-    <%= @activity.polarity_class.capitalize %>
+    <%= @habit.polarity_class.capitalize %>
     </p>
 
     <p>
     <strong>Description:</strong>
-    <%= @activity.description %>
+    <%= @habit.description %>
     </p>
 
     <p>
-    <%= link_to 'Add a Habit', new_activity_path %>
+    <%= link_to 'Add a Habit', new_habit_path %>
     </p>
 
-    <%= link_to 'Edit', edit_activity_path(@activity) %> |
-    <%= link_to 'Habits', activities_path %> | 
-    <%= link_to 'Delete', @activity, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Edit', edit_habit_path(@habit) %> |
+    <%= link_to 'Habits', habits_path %> | 
+    <%= link_to 'Delete', @habit, method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
 </div>

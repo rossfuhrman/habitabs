@@ -3,33 +3,33 @@ require 'spec_helper'
 describe Mark do
   describe "adding a mark" do
     it "is valid with todays date" do
-      activity = Activity.create
-      mark = Mark.new( activity_id: activity.id,
+      habit = Habit.create
+      mark = Mark.new( habit_id: habit.id,
                       mark_date: Date.today)
       expect(mark).to be_valid
 
     end
     it "is valid with a previous date" do
-      activity = Activity.create
-      mark = Mark.new( activity_id: activity.id,
+      habit = Habit.create
+      mark = Mark.new( habit_id: habit.id,
                       mark_date: Date.today - 1)
       expect(mark).to be_valid
 
     end
 
     it "is invalid with a date in the future" do
-      activity = Activity.create
-      mark = Mark.new( activity_id: activity.id,
+      habit = Habit.create
+      mark = Mark.new( habit_id: habit.id,
                       mark_date: Date.today + 1)
       expect(mark).to have(1).errors_on(:mark_date)
     end
-    it "knows what activity it belongs to" do
-      activity = Activity.new :title => "hey"
-      activity.user = FactoryGirl.create(:user)
-      activity.save!
-      mark = Mark.create( activity_id: activity.id,
+    it "knows what habit it belongs to" do
+      habit = Habit.new :title => "hey"
+      habit.user = FactoryGirl.create(:user)
+      habit.save!
+      mark = Mark.create( habit_id: habit.id,
                       mark_date: Date.today + 1)
-      expect(mark.activity).should eq(activity)
+      expect(mark.habit).should eq(habit)
     end
   end
 end

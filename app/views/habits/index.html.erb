@@ -1,8 +1,8 @@
 <div class="row"> 
   <div class="small-12 columns">
-    <h2><%= link_to "Previous Week ", activities_path(:start_date => @start_date_for_previous_link) %></h2>
+    <h2><%= link_to "Previous Week ", habits_path(:start_date => @start_date_for_previous_link) %></h2>
     <% if @start_date_for_next_link %>
-      <h2><%= link_to "Next Week ", activities_path(:start_date => @start_date_for_next_link) %></h2>
+      <h2><%= link_to "Next Week ", habits_path(:start_date => @start_date_for_next_link) %></h2>
     <% end %>
 
 
@@ -16,28 +16,28 @@
             <% unless day.in_the_future? %>
               <a href="#panel<%=day.date.amjd.to_i%>"><%= "#{day.day_of_week}, #{day.date}" %></a>
               <div id="panel<%=day.date.amjd.to_i%>" class="content <%= active %>">
-                <% @activities.each do |activity| %>
+                <% @habits.each do |habit| %>
 
                   <div class="row">
                     <div class="small-6 large-4 columns">
-                      <div  class="<%=activity.polarity_class %>">
-                        <%= link_to activity.title, activity %>
+                      <div  class="<%=habit.polarity_class %>">
+                        <%= link_to habit.title, habit %>
                       </div>
                     </div>
                     <div class="small-2 large-4 columns">
-                      <div style=" " class="add_mark" data-id="<%=activity.id %>" data-date="<%= day.date %>">
+                      <div style=" " class="add_mark" data-id="<%=habit.id %>" data-date="<%= day.date %>">
                         <i class="general fi-plus">
                         </i>
 
                       </div>
                     </div>
                     <div class="small-2 large-2 columns">
-                      <div class="count <%=activity.polarity_class %>-count" id="<%="#{activity.id}#{day.date}"%>"> 
-                        <%= activity.marks_on_date(day.date) %>
+                      <div class="count <%=habit.polarity_class %>-count" id="<%="#{habit.id}#{day.date}"%>"> 
+                        <%= habit.marks_on_date(day.date) %>
                       </div>
                     </div>
                     <div class="small-2 large-2 columns">
-                      <div style="" class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= day.date %>">
+                      <div style="" class="destroy_mark" data-id="<%=habit.id %>" data-date="<%= day.date %>">
                         <i class="general fi-minus">
                         </i>
                       </div>
@@ -72,11 +72,11 @@
         </thead>
 
         <tbody>
-          <% @activities.each do |activity| %>
+          <% @habits.each do |habit| %>
             <tr>
               <td > 
-                <div  class="<%=activity.polarity_class %>">
-                  <%= link_to activity.title, activity %>
+                <div  class="<%=habit.polarity_class %>">
+                  <%= link_to habit.title, habit %>
                 </div>
               </td>
               <% @date_range.days.each do |day| %>
@@ -84,17 +84,17 @@
                 
                   <% unless day.in_the_future? %>
                     <br />
-                    <div style="float:left; width:32px; " class="add_mark" data-id="<%=activity.id %>" data-date="<%= day.date %>">
+                    <div style="float:left; width:32px; " class="add_mark" data-id="<%=habit.id %>" data-date="<%= day.date %>">
                       <i class="general fi-plus">
                       </i>
 
                     </div>
-                    <div style="float:right; " class="destroy_mark" data-id="<%=activity.id %>" data-date="<%= day.date %>">
+                    <div style="float:right; " class="destroy_mark" data-id="<%=habit.id %>" data-date="<%= day.date %>">
                       <i class="general fi-minus">
                       </i>
                     </div>
-                    <div class="count <%=activity.polarity_class %>-count" id="<%="#{activity.id}#{day.date}"%>"> 
-                      <%= activity.marks_on_date(day.date) %>
+                    <div class="count <%=habit.polarity_class %>-count" id="<%="#{habit.id}#{day.date}"%>"> 
+                      <%= habit.marks_on_date(day.date) %>
                     </div>
                   <% end %>
                 </td>
@@ -116,7 +116,7 @@
     <br>
 
     <p>
-    <%= link_to 'Add a Habit', new_activity_path %>
+    <%= link_to 'Add a Habit', new_habit_path %>
     </p>
   </div>
 </div>

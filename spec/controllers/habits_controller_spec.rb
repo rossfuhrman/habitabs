@@ -18,14 +18,14 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe ActivitiesController do
+describe HabitsController do
   login_user
 
   before(:each) do
-      @activity = Activity.new :title => "hey"
-      @activity.user = subject.current_user
-      @activity.save
-      #activity = FactoryGirl.create(:activity)
+      @habit = Habit.new :title => "hey"
+      @habit.user = subject.current_user
+      @habit.save
+      #habit = FactoryGirl.create(:habit)
   end
 
   it "should have a current_user" do
@@ -41,25 +41,25 @@ describe ActivitiesController do
   end
 
   # This should return the minimal set of attributes required to create a valid
-  # Activity. As you add validations to Activity, be sure to
+  # Habit. As you add validations to Habit, be sure to
   # adjust the attributes here as well.
   #let(:valid_attributes) { { "title" => "MyString", "user" => @user.id } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # ActivitiesController. Be sure to keep this updated too.
+  # HabitsController. Be sure to keep this updated too.
   #let(:valid_session) { {} }
   #
 
   describe "GET index" do
-    it "assigns all users activities as @activities" do
-      #FactoryGirl.create(:other_users_activity)
-      other_activity = Activity.new :title => "some other title"
-      other_activity.user = FactoryGirl.create(:other_user)
-      other_activity.save
+    it "assigns all users habits as @habits" do
+      #FactoryGirl.create(:other_users_habit)
+      other_habit = Habit.new :title => "some other title"
+      other_habit.user = FactoryGirl.create(:other_user)
+      other_habit.save
 
       get :index, {}
-      assigns(:activities).should eq([@activity])
+      assigns(:habits).should eq([@habit])
     end
 
     it "sets @date_range if no params are passed" do
@@ -99,59 +99,59 @@ describe ActivitiesController do
 
 
   describe "GET show" do
-    it "assigns the requested activity as @activity" do
-      get :show, {:id => @activity.to_param}
-      assigns(:activity).should eq(@activity)
+    it "assigns the requested habit as @habit" do
+      get :show, {:id => @habit.to_param}
+      assigns(:habit).should eq(@habit)
     end
   end
 
   describe "GET new" do
-    it "assigns a new activity as @activity" do
+    it "assigns a new habit as @habit" do
       get :new, {}
-      assigns(:activity).should be_a_new(Activity)
+      assigns(:habit).should be_a_new(Habit)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested activity as @activity" do
-      get :edit, {:id => @activity.to_param}
-      assigns(:activity).should eq(@activity)
+    it "assigns the requested habit as @habit" do
+      get :edit, {:id => @habit.to_param}
+      assigns(:habit).should eq(@habit)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new Activity" do
+      it "creates a new Habit" do
         expect {
-          post :create, {:activity => FactoryGirl.build(:activity).attributes}
-        }.to change(Activity, :count).by(1)
+          post :create, {:habit => FactoryGirl.build(:habit).attributes}
+        }.to change(Habit, :count).by(1)
       end
 
-      it "assigns a newly created activity as @activity" do
-        activity_params = FactoryGirl.build(:activity).attributes
-        post :create, {:activity => activity_params}
-        assigns(:activity).should be_a(Activity)
-        assigns(:activity).should be_persisted
+      it "assigns a newly created habit as @habit" do
+        habit_params = FactoryGirl.build(:habit).attributes
+        post :create, {:habit => habit_params}
+        assigns(:habit).should be_a(Habit)
+        assigns(:habit).should be_persisted
       end
 
-      it "redirects to the created activity" do
-        post :create, {:activity => FactoryGirl.build(:activity).attributes}
-        response.should redirect_to(Activity.last)
+      it "redirects to the created habit" do
+        post :create, {:habit => FactoryGirl.build(:habit).attributes}
+        response.should redirect_to(Habit.last)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved activity as @activity" do
+      it "assigns a newly created but unsaved habit as @habit" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Activity.any_instance.stub(:save).and_return(false)
-        post :create, {:activity => { "title" => "invalid value" }}
-        assigns(:activity).should be_a_new(Activity)
+        Habit.any_instance.stub(:save).and_return(false)
+        post :create, {:habit => { "title" => "invalid value" }}
+        assigns(:habit).should be_a_new(Habit)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Activity.any_instance.stub(:save).and_return(false)
-        post :create, {:activity => { "title" => "invalid value" }}
+        Habit.any_instance.stub(:save).and_return(false)
+        post :create, {:habit => { "title" => "invalid value" }}
         response.should render_template("new")
       end
     end
@@ -159,61 +159,61 @@ describe ActivitiesController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested activity" do
-        # Assuming there are no other activities in the database, this
-        # specifies that the Activity created on the previous line
+      it "updates the requested habit" do
+        # Assuming there are no other habits in the database, this
+        # specifies that the Habit created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Activity.any_instance.should_receive(:update).with({ "title" => "MyString", "user_id" => 1 })
-        put :update, {:id => @activity.to_param, :activity => { "title" => "MyString" }}
+        Habit.any_instance.should_receive(:update).with({ "title" => "MyString", "user_id" => 1 })
+        put :update, {:id => @habit.to_param, :habit => { "title" => "MyString" }}
       end
 
-      it "assigns the requested activity as @activity" do
-        put :update, {:id => @activity.to_param, :activity => { "title" => "MyString" }}
-        assigns(:activity).should eq(@activity)
+      it "assigns the requested habit as @habit" do
+        put :update, {:id => @habit.to_param, :habit => { "title" => "MyString" }}
+        assigns(:habit).should eq(@habit)
       end
 
-      it "redirects to the activity" do
-        put :update, {:id => @activity.to_param, :activity => { "title" => "MyString" }}
-        response.should redirect_to(@activity)
+      it "redirects to the habit" do
+        put :update, {:id => @habit.to_param, :habit => { "title" => "MyString" }}
+        response.should redirect_to(@habit)
       end
     end
 
     describe "with invalid params" do
-      it "assigns the activity as @activity" do
+      it "assigns the habit as @habit" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Activity.any_instance.stub(:save).and_return(false)
-        put :update, {:id => @activity.to_param, :activity => { "title" => "invalid value" }}
-        assigns(:activity).should eq(@activity)
+        Habit.any_instance.stub(:save).and_return(false)
+        put :update, {:id => @habit.to_param, :habit => { "title" => "invalid value" }}
+        assigns(:habit).should eq(@habit)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Activity.any_instance.stub(:save).and_return(false)
-        put :update, {:id => @activity.to_param, :activity => { "title" => "invalid value" }}
+        Habit.any_instance.stub(:save).and_return(false)
+        put :update, {:id => @habit.to_param, :habit => { "title" => "invalid value" }}
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested activity" do
+    it "destroys the requested habit" do
       expect {
-        delete :destroy, {:id => @activity.to_param}
-      }.to change(Activity, :count).by(-1)
+        delete :destroy, {:id => @habit.to_param}
+      }.to change(Habit, :count).by(-1)
     end
 
-    it "destroys the marks for the activity" do
-      Mark.create mark_date: Time.current.to_date, activity_id: @activity.id, count: 1
+    it "destroys the marks for the habit" do
+      Mark.create mark_date: Time.current.to_date, habit_id: @habit.id, count: 1
 
       expect{
-        delete :destroy, {:id => @activity.to_param}
+        delete :destroy, {:id => @habit.to_param}
       }.to change(Mark, :count).by(-1)
     end
 
-    it "redirects to the activities list" do
-      delete :destroy, {:id => @activity.to_param}
-      response.should redirect_to(activities_url)
+    it "redirects to the habits list" do
+      delete :destroy, {:id => @habit.to_param}
+      response.should redirect_to(habits_url)
     end
   end
 

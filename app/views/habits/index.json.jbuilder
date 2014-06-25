@@ -1,4 +1,4 @@
-json.array!(@activities) do |activity|
-  json.extract! activity, :id, :title, :private, :polarity
-  json.url activity_url(activity, format: :json)
+json.array!(@habits) do |habit|
+  json.extract! habit, :id, :title, :private, :polarity
+  json.url habit_url(habit, format: :json)
 end
