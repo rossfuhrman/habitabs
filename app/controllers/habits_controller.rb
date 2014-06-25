@@ -5,7 +5,14 @@ class HabitsController < ApplicationController
   # GET /habits
   # GET /habits.json
   def index
-    @habits = Habit.where(user_id: current_user.id)
+    #
+    #
+    #
+    #
+    #this includes all of the marks
+    #so after a year or two of marks 
+    #it could become a problem :(
+    @habits = Habit.where(user_id: current_user.id).includes(:marks)
     @date_range = get_date_range
     @start_date_for_previous_link = get_start_date_for_previous_week_link @date_range
     @start_date_for_next_link = get_start_date_for_next_link @date_range

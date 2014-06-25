@@ -2,6 +2,7 @@ class Habit < ActiveRecord::Base
   validates_presence_of :title, :user
   belongs_to :user
   has_many :marks , :dependent => :destroy
+  #NEEDS TO BE TESTED
   def marks_on_date date
     count = marks.where(:mark_date => date).count
     if count == 0
@@ -9,6 +10,12 @@ class Habit < ActiveRecord::Base
     else
       count
     end
+  end
+  
+  #NEEDS TO BE TESTED
+  def select_it an_date
+    the_count = marks.select{|f| f.mark_date == an_date}.count
+    the_count == 0 ? "" : the_count 
   end
 
   NEUTRAL = 0
