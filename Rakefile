@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Activities::Application.load_tasks
+Habits::Application.load_tasks
