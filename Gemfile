@@ -47,6 +47,7 @@ gem 'foundation-rails'
 # gem 'capistrano', group: :development
 
 group :development do
+  gem 'rack-mini-profiler'
   gem 'pry-rails'
 end
 
