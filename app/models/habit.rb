@@ -16,7 +16,7 @@ class Habit < ActiveRecord::Base
   end
   
   #NEEDS TO BE TESTED
-  def select_it an_date
+  def mark_total an_date
     the_count = marks.select{|f| f.mark_date == an_date}.count
     the_count == 0 ? "" : the_count 
   end
