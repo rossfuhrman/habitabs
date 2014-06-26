@@ -23,6 +23,7 @@ gem 'foundation-icons-sass-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem "jquery-ui-rails"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -36,6 +37,8 @@ group :doc do
 end
 
 gem 'foundation-rails'
+
+gem 'acts_as_list' #added so we can sort the habits
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

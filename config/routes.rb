@@ -1,7 +1,12 @@
 Habits::Application.routes.draw do
   devise_for :admins
   devise_for :users
-  resources :habits
+  resources :habits do
+    collection do
+      match 'list', via: :get
+      match 'sort', via: :post
+    end
+  end
   resources :marks
 
   # The priority is based upon order of creation: first created -> highest priority.

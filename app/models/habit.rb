@@ -2,6 +2,9 @@ class Habit < ActiveRecord::Base
   validates_presence_of :title, :user
   belongs_to :user
   has_many :marks , :dependent => :destroy
+
+  acts_as_list
+
   #NEEDS TO BE TESTED
   def marks_on_date date
     count = marks.where(:mark_date => date).count

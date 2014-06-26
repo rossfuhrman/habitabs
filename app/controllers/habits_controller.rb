@@ -12,7 +12,7 @@ class HabitsController < ApplicationController
     #this includes all of the marks
     #so after a year or two of marks 
     #it could become a problem :(
-    @habits = Habit.where(user_id: current_user.id).includes(:marks)
+    @habits = Habit.where(user_id: current_user.id).includes(:marks).order(:position)
     @date_range = get_date_range
     @start_date_for_previous_link = get_start_date_for_previous_week_link @date_range
     @start_date_for_next_link = get_start_date_for_next_link @date_range
@@ -21,6 +21,17 @@ class HabitsController < ApplicationController
   # GET /habits/1
   # GET /habits/1.json
   def show
+  end
+
+  def list
+    @habits = Habit.where(user_id: current_user.id).order(:position)
+  end
+
+  def sort
+    params[:habit].each_with_index do |id, index|
+      Habit.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
   end
 
   # GET /habits/new

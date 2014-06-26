@@ -1,4 +1,4 @@
-// Place all the styles related to the activities controller here.
+// Place all the styles related to the habits controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'foundation-icons';
@@ -37,4 +37,7 @@ td .negative-count {
   padding: 10px 0px;
   display: block;
   cursor: pointer;
+}
+#habits .handle {
+  cursor: move;
 }
