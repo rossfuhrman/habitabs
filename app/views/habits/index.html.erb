@@ -94,7 +94,7 @@
                       </i>
                     </div>
                     <div class="count <%=habit.polarity_class %>-count" id="<%="#{habit.id}#{day.date}"%>"> 
-                    <%= habit.select_it day.date %>
+                    <%= habit.mark_total day.date %>
                     </div>
                   <% end %>
                 </td>
