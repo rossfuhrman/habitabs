@@ -25,6 +25,24 @@ class Habit < ActiveRecord::Base
   POSITIVE = 1
   NEGATIVE = 2
 
+  #NEEDS TO BE TESTED
+  def mark_value count_of_marks
+    if polarity == POSITIVE
+      count_of_marks
+    elsif polarity == NEGATIVE
+      count_of_marks * -1
+    else
+      0
+    end
+  end
+
+  #NEEDS TO BE TESTED
+  def mark_sum_for date
+    count = mark_total(date).to_i 
+    mark_value(count)
+  end
+
+
   def polarity_class
     if polarity == POSITIVE
       "positive"

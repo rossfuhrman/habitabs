@@ -75,18 +75,16 @@
           data: {"_method":"remove", mark: {
             habit_id: $(this).attr("data-id"),
             mark_date: $(this).attr("data-date")}},
-          dataType:'html',
+          dataType:'json',
           success:function(returned_value){
-            if(returned_value === 0){
-              returned_value = "";
-            }
             //if(returned_value) {
               mark_count_div.fadeOut(250, function() {
-                $(this).text(returned_value).fadeIn(1100, function() {
+                $(this).text(returned_value.habit_mark_count).fadeIn(1100, function() {
                   // Animation complete
                 })
                 // Animation complete.
               });
+              $("." + String(mark_date) + "_total").text(returned_value.day_total);
             }
           //}
         });
@@ -102,7 +100,6 @@
       });
         var habit_id = $(this).attr("data-id");
         var mark_date = $(this).attr("data-date");
-        //var mark_count_div = $("#" + String(habit_id) + String(mark_date));
         var mark_count_div = $('[id=' + String(habit_id) + String(mark_date) + ']');
         $.ajax({
           url:'/marks',
@@ -114,12 +111,13 @@
           success:function(returned_value){
             //if(returned_value) {
               mark_count_div.fadeOut(250, function() {
-                $(this).text(returned_value).fadeIn(1100, function() {
+                $(this).text(returned_value.habit_mark_count).fadeIn(1100, function() {
                   // Animation complete
                 })
                 // Animation complete.
               });
             //}
+              $("." + String(mark_date) + "_total").text(returned_value.day_total);
           }
         })
     });

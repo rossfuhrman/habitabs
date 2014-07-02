@@ -16,6 +16,13 @@ class HabitsController < ApplicationController
     @date_range = get_date_range
     @start_date_for_previous_link = get_start_date_for_previous_week_link @date_range
     @start_date_for_next_link = get_start_date_for_next_link @date_range
+    get_mark_total_for_each_day
+  end
+
+  def get_mark_total_for_each_day 
+    @date_range.days.each_with_index do |day, i|
+      day.mark_total = @habits.map{|habit| habit.mark_sum_for day.date}.inject(0, :+)
+    end
   end
 
   # GET /habits/1

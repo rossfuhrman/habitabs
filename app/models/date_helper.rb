@@ -6,6 +6,9 @@ class DateHelper
   def date
     @date
   end
+
+  attr_accessor :mark_total
+
   def to_date
     date.strftime
   end

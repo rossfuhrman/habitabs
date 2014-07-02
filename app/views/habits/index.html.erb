@@ -11,10 +11,15 @@
       <dl class="accordion" data-accordion>
 
         <% active = "active" %>
-        <% @date_range.days.reverse.each do |day| %>
+        <% @date_range.days.reverse.each_with_index do |day, i| %>
           <dd>
             <% unless day.in_the_future? %>
-              <a href="#panel<%=day.date.amjd.to_i%>"><%= "#{day.day_of_week}, #{day.date}" %></a>
+              <a href="#panel<%=day.date.amjd.to_i%>"><%= "#{day.day_of_week}, #{day.date} __________ Total:" %>
+
+                <div class="<%= "#{day.date}_total" %>">
+                  <%= "#{ day.mark_total}" %> 
+                </div>
+                </a>
               <div id="panel<%=day.date.amjd.to_i%>" class="content <%= active %>">
                 <% @habits.each do |habit| %>
 
@@ -61,11 +66,12 @@
         <thead>
           <tr>
             <th>Title</th>
-            <% @date_range.days.each do |day| %>
+            <% @date_range.days.each_with_index do |day, i| %>
               <th> 
                 <%= day.day_of_week %>
                 <br />
                 <%= day.date.to_date %>
+                <br />
               </th>
             <% end %>
           </tr>
@@ -79,7 +85,7 @@
                   <%= link_to habit.title, habit %>
                 </div>
               </td>
-              <% @date_range.days.each do |day| %>
+              <% @date_range.days.each_with_index do |day, i| %>
                 <td>
                 
                   <% unless day.in_the_future? %>
@@ -104,9 +110,14 @@
         </tbody>
         <tfoot>
           <tr>
-            <th>Title</th>
-            <% @date_range.days.each do |day| %>
-              <th> <%= day.date.to_date %> </th>
+            <th>Totals</th>
+            <% @date_range.days.each_with_index do |day, i| %>
+              <th> <%= day.date.to_date %> 
+                <br />
+                <div class="<%= "#{day.date}_total" %>">
+                  <%= day.mark_total %>
+                </div>
+              </th>
             <% end %>
           </tr>
         </tfoot>
