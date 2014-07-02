@@ -29,7 +29,9 @@
   <ul class="right">
   <% if user_signed_in? %>
     <li class="divider"></li>
-      <li><%= link_to "Profile", edit_user_registration_path %></li>
+    <li>
+    <% # link_to "Profile", edit_user_registration_path %>
+    </li>
       <li class="divider"></li>
       <li><%= link_to "Settings", '#' %></li>
       <li class="divider"></li>
