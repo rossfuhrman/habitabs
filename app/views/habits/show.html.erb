@@ -33,9 +33,9 @@
         <%= date.day %>
         <% if @marks_by_date[date] %>
           <ul>
-            <% @marks_by_date[date].each do |mark| %>
-              <li><%= link_to mark.mark_date, mark %></li>
-            <% end %>
+            <li>
+              <%= @marks_by_date[date].count %>
+            </li>
           </ul>
         <% end %>
       <% end %>
