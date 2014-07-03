@@ -12,7 +12,6 @@
   display: block;
 }
 .negative {
-  background-color:red;
 }
 .negative a{
   padding: 2px;
@@ -47,7 +46,7 @@ td .negative-count {
 
   td, th {
     font-family: "Lucida Grande", arial, helvetica, sans-serif;
-    font-size: 0px;
+    font-size: 10px;
     padding: 6px;
     border: 1px solid #999;
 }
@@ -87,4 +86,10 @@ td {
   font-size: 18px;
   padding-left: 20px;
   list-style-type: none;
+}
+#habits ul .positive-count {
+  color: green;
+}
+#habits ul .negative-count {
+  color: red;
 }
