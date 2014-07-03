@@ -5,19 +5,20 @@ class Habit < ActiveRecord::Base
 
   acts_as_list
 
-  #NEEDS TO BE TESTED
+  #this is for a singular habit that hasn't :include marks
+  #and it is for a specific date
+  #the mark_total has a habit that has all the marks included anyways
+  #so limiting it to a specific date with a where call
+  #won't provide any perf increases
   def marks_on_date date
-    count = marks.where(:mark_date => date).count
-    if count == 0
-      ""
-    else
-      count
-    end
+    the_count = marks.where(mark_date: date).count
+    the_count == 0 ? "" : the_count 
   end
   
-  #NEEDS TO BE TESTED
+  #this is for a collection of habits that did an :include of marks,
+  #so we don't want to do another query to get them
   def mark_total an_date
-    the_count = marks.select{|f| f.mark_date == an_date}.count
+    the_count = marks.select{|m| m.mark_date == an_date}.count
     the_count == 0 ? "" : the_count 
   end
 
@@ -25,32 +26,22 @@ class Habit < ActiveRecord::Base
   POSITIVE = 1
   NEGATIVE = 2
 
-  #NEEDS TO BE TESTED
+
   def mark_value count_of_marks
-    if polarity == POSITIVE
-      count_of_marks
-    elsif polarity == NEGATIVE
-      count_of_marks * -1
-    else
-      0
-    end
+    return 0 if polarity == NEUTRAL
+    return count_of_marks * -1 if polarity == NEGATIVE
+    count_of_marks
   end
 
-  #NEEDS TO BE TESTED
   def mark_sum_for date
     count = mark_total(date).to_i 
     mark_value(count)
   end
 
-
   def polarity_class
-    if polarity == POSITIVE
-      "positive"
-    elsif polarity == NEGATIVE
-      "negative"
-    else
-      "neutral"
-    end
+    return "positive" if polarity == POSITIVE
+    return "negative" if polarity == NEGATIVE
+    "neutral"
   end
 
 end
