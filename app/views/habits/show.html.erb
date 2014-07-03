@@ -32,7 +32,7 @@
       <%= calendar @date do |date| %>
         <%= date.day %>
         <% if @marks_by_date[date] %>
-          <ul>
+          <ul class="<%=@habit.polarity_class %>" >
             <li>
               <%= @marks_by_date[date].count %>
             </li>
