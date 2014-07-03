@@ -23,10 +23,15 @@
     <%= link_to 'Habits', habits_path %> | 
     <%= link_to 'Delete', @habit, method: :delete, data: { confirm: 'Are you sure?' } %>
 
+    <br />
+    <br />
 
-    <%= link_to "<", date: @date.prev_month %>
-    <%= @date.strftime("%B %Y") %>
-    <%= link_to ">", date: @date.next_month %>
+    <%= link_to "< Previous", date: @date.prev_month %>
+    | <%= @date.strftime("%B %Y") %> | 
+    <%= link_to " Next >", date: @date.next_month %>
+
+    <br />
+    <br />
 
     <div id="habits">
       <%= calendar @date do |date| %>
