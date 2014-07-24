@@ -136,7 +136,7 @@ describe HabitsController do
 
       it "redirects to the created habit" do
         post :create, {:habit => FactoryGirl.build(:habit).attributes}
-        response.should redirect_to(Habit.last)
+        response.should redirect_to(habits_url)
       end
     end
 

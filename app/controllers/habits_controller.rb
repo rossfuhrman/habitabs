@@ -13,6 +13,7 @@ class HabitsController < ApplicationController
     #so after a year or two of marks 
     #it could become a problem :(
     @habits = Habit.where(user_id: current_user.id).includes(:marks).order(:position)
+    @measured_habits = MeasuredHabit.where(user_id: current_user.id).includes(:measurements).order(:position)
     @date_range = get_date_range
     @start_date_for_previous_link = get_start_date_for_previous_week_link @date_range
     @start_date_for_next_link = get_start_date_for_next_link @date_range
@@ -55,11 +56,21 @@ class HabitsController < ApplicationController
   # POST /habits
   # POST /habits.json
   def create
-    @habit = Habit.new(habit_params)
+    measurement_type = if params[:extra]
+                          params[:extra][:measurement_type]
+                       else
+                         "Marks"
+                       end
+    if measurement_type == "" || measurement_type == "Marks"
+      @habit = Habit.new(habit_params)
+    else
+      @habit = MeasuredHabit.new(habit_params)
+      @habit.measurement_type = measurement_type
+    end
 
     respond_to do |format|
       if @habit.save
-        format.html { redirect_to @habit, notice: 'Habit was successfully created.' }
+        format.html { redirect_to habits_url, notice: 'Habit was successfully created.' }
         format.json { render action: 'show', status: :created, location: @habit }
       else
         format.html { render action: 'new' }

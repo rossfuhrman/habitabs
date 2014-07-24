@@ -125,6 +125,39 @@
           }
         })
     });
+
+    $(".add_measurement").focusout(function(){
+      $(this).fadeOut(100, function() {
+        $(this).fadeIn(100, function() {
+          // Animation complete
+        })
+        // Animation complete.
+      });
+        var measured_habit_id = $(this).attr("data-id");
+        var measurement_date = $(this).attr("data-date");
+        var input = $(this).find("input")
+        var measurement_value = input.val() ; 
+
+        $.ajax({
+          url:'/measurements',
+          type:'post',
+          data:{ measurement: {
+            measured_habit_id: measured_habit_id,
+            measurement_date: measurement_date,
+            value: measurement_value}},
+          dataType:'json',
+          success:function(returned_value){
+            input.val(returned_value.value) ;
+          },
+          error:function(){
+            input.val("") ;
+          }
+
+        })
+
+
+    });
+
   });
 </script>
 </html>

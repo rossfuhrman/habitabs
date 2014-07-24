@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626223507) do
+ActiveRecord::Schema.define(version: 20140724021621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,13 +38,14 @@ ActiveRecord::Schema.define(version: 20140626223507) do
 
   create_table "habits", force: true do |t|
     t.string   "title"
-    t.boolean  "private",     default: true
+    t.boolean  "private",          default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "polarity",    default: 0
+    t.integer  "polarity",         default: 0
     t.text     "description"
     t.integer  "position"
+    t.string   "measurement_type", default: "Marks"
   end
 
   add_index "habits", ["user_id"], name: "index_habits_on_user_id", using: :btree
@@ -56,6 +57,32 @@ ActiveRecord::Schema.define(version: 20140626223507) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "measured_habits", force: true do |t|
+    t.string   "title"
+    t.boolean  "private"
+    t.integer  "polarity",         default: 0
+    t.text     "description"
+    t.integer  "position"
+    t.string   "measurement_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "measured_habits", ["user_id"], name: "index_measured_habits_on_user_id", using: :btree
+
+  create_table "measurements", force: true do |t|
+    t.date     "measurement_date"
+    t.decimal  "value",             precision: 10, scale: 4
+    t.decimal  "decimal",           precision: 10, scale: 4
+    t.integer  "habit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "measured_habit_id"
+  end
+
+  add_index "measurements", ["measured_habit_id"], name: "index_measurements_on_measured_habit_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

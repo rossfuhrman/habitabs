@@ -1,0 +1,51 @@
+<div class="row"> 
+  <div class="small-12 columns">
+    <p>
+    <strong>Title:</strong>
+    <%= @measured_habit.title %>
+    </p>
+
+    <p>
+    <strong>Polarity:</strong>
+    <%= @measured_habit.polarity_class.capitalize %>
+    </p>
+
+    <p>
+    <strong>Description:</strong>
+    <%= @measured_habit.description %>
+    </p>
+
+    <p>
+    <%= link_to 'Add a Habit', new_habit_path %>
+    </p>
+
+    <%= link_to 'Edit', edit_measured_habit_path(@measured_habit) %> |
+    <%= link_to 'Habits', habits_path %> | 
+    <%= link_to 'Delete', @measured_habit, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <br />
+    <br />
+
+    <%= link_to "< Previous", date: @date.prev_month %>
+    | <%= @date.strftime("%B %Y") %> | 
+    <%= link_to " Next >", date: @date.next_month %>
+
+    <br />
+    <br />
+
+    <div id="habits">
+      <%= calendar @date do |date| %>
+        <%= date.day %>
+        <% if  1==2 && @marks_by_date[date] %>
+          <ul class="<%=@measured_habit.polarity_class %>" >
+            <li>
+              <%= @marks_by_date[date].count %>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

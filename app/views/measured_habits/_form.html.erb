@@ -1,10 +1,10 @@
-<%= form_for(@habit) do |f| %>
-  <% if @habit.errors.any? %>
+<%= form_for(@measured_habit) do |f| %>
+  <% if @measured_habit.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@habit.errors.count, "error") %> prohibited this habit from being saved:</h2>
+      <h2><%= pluralize(@measured_habit.errors.count, "error") %> prohibited this habit from being saved:</h2>
 
       <ul>
-      <% @habit.errors.full_messages.each do |msg| %>
+      <% @measured_habit.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -18,11 +18,11 @@
 
   <div class="field">
     <label>This habit is: </label><br>
-    <%= f.radio_button :polarity, Habit::NEUTRAL  %> 
+    <%= f.radio_button :polarity, MeasuredHabit::NEUTRAL  %> 
     <label>Neutral</label>
-    <%= f.radio_button :polarity, Habit::POSITIVE %>
+    <%= f.radio_button :polarity, MeasuredHabit::POSITIVE %>
     <label>+ Positive</label>
-    <%= f.radio_button :polarity, Habit::NEGATIVE %>
+    <%= f.radio_button :polarity, MeasuredHabit::NEGATIVE %>
     <label>- Negative</label>
   </div>
 
@@ -34,9 +34,7 @@
   <div class="field">
     <span data-tooltip class="has-tip" title="The default is 'mark' and you would use that for indicating you did something on a day, such as drank coffee or exercised. The other options let you track things like riding your bike for 10.5 miles or running for 30 minutes. You can also track your weight over time. Specifying these alternate measurements will allow us to create some interesting graphs for you once you've entered some data.">Measurement</span>
 
-
-    <%= select("extra", "measurement_type", MeasuredHabit.measurement_options,  {include_blank: true}) %>
-
+     <%= f.select :measurement_type, options_for_select(MeasuredHabit.measurement_options, :selected => f.object.measurement_type), :class => '' %>
   </div>
   <br/>
 
@@ -47,3 +45,4 @@
   <br />
 
 <% end %>
+

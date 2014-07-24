@@ -1,6 +1,12 @@
 Habits::Application.routes.draw do
   devise_for :admins
   devise_for :users
+  resources :measured_habits do
+    collection do
+      match 'list', via: :get
+      match 'sort', via: :post
+    end
+  end
   resources :habits do
     collection do
       match 'list', via: :get
@@ -8,6 +14,7 @@ Habits::Application.routes.draw do
     end
   end
   resources :marks
+  resources :measurements
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

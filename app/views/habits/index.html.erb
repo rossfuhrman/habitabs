@@ -122,6 +122,44 @@
           </tr>
         </tfoot>
       </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <% @date_range.days.each_with_index do |day, i| %>
+              <th> 
+                <%= day.day_of_week %>
+                <br />
+                <%= day.date.to_date %>
+                <br />
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @measured_habits.each do |habit| %>
+            <tr>
+              <td > 
+                <div  class="<%=habit.polarity_class %>">
+                  <%= link_to habit.title, habit %>
+                </div>
+              </td>
+              <% @date_range.days.each_with_index do |day, i| %>
+                <td>
+                
+                  <% unless day.in_the_future? %>
+                    <br />
+                      <div class="add_measurement <%=habit.polarity_class %>-count" data-id="<%=habit.id %>" data-date="<%= day.date %>" id="<%="#{habit.id}#{day.date}"%>"> 
+                      <input id="foo" value="<%= habit.get_measurement_value day.date %>" size="8" />
+                    </div>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
     </div>  
 
     <br>
