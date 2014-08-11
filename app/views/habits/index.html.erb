@@ -130,7 +130,7 @@
             <% @date_range.days.each_with_index do |day, i| %>
               <th> <%= day.date.to_date %> 
                 <br />
-                <div class="<%= "#{day.date}_total" %>">
+                <div class="total <%= "#{day.date}_total" %>">
                   <%= day.mark_total %>
                 </div>
               </th>
