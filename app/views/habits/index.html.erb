@@ -48,9 +48,25 @@
                       </div>
                     </div>
                   </div>
-
-
                 <% end %>
+
+                <% @measured_habits.each do |habit| %>
+                  <div class="row">
+                    <div class="small-6 large-4 columns">
+                      <div  class="<%=habit.polarity_class %>">
+                        <%= link_to habit.title, habit %>
+                      </div>
+                    </div>
+                    <div class="small-2 large-4 columns"> &nbsp; </div>
+                    <div class="small-2 large-2 columns">
+                      <div class="add_measurement <%=habit.polarity_class %>-count" data-id="<%=habit.id %>" data-date="<%= day.date %>" id="<%="#{habit.id}#{day.date}"%>"> 
+                        <input id="foo" value="<%= habit.get_measurement_value day.date %>" size="8" />
+                      </div>
+                    </div>
+                    <div class="small-2 large-2 columns"> &nbsp; </div>
+                  </div>
+                <% end %>
+
               </div>
             <% end %>
           </dd>
