@@ -36,13 +36,11 @@
     <div id="habits">
       <%= calendar @date do |date| %>
         <%= date.day %>
-        <% if  1==2 && @marks_by_date[date] %>
-          <ul class="<%=@measured_habit.polarity_class %>" >
-            <li>
-              <%= @marks_by_date[date].count %>
-            </li>
-          </ul>
-        <% end %>
+        <ul class="<%=@measured_habit.polarity_class %>" >
+          <li>
+            <%= @measured_habit.get_measurement_value date %>
+          </li>
+        </ul>
       <% end %>
     </div>
 
