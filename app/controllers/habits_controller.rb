@@ -29,7 +29,7 @@ class HabitsController < ApplicationController
   # GET /habits/1
   # GET /habits/1.json
   def show
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @date = params[:date] ? Date.parse(params[:date]) : Time.current.to_date
     @marks_by_date = @habit.marks.group_by(&:mark_date)
   end
 
