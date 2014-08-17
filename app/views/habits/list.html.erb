@@ -2,7 +2,7 @@
   Drag your habits to change their order.
 </p>
 
-<ul id="habits" data-update-url="<%= sort_habits_url %>">
+<ul id="sortable_habits" data-update-url="<%= sort_habits_url %>">
   <% @habits.each do |habit| %>
     <%= content_tag_for :li, habit do %>
       <span class="handle">[drag]</span>
