@@ -14,10 +14,10 @@
         <% @date_range.days.reverse.each_with_index do |day, i| %>
           <dd>
             <% unless day.in_the_future? %>
-              <a href="#panel<%=day.date.amjd.to_i%>"><%= "#{day.day_of_week}, #{day.date} __________ Total:" %>
+              <a href="#panel<%=day.date.amjd.to_i%>"><%= "#{day.day_of_week_abbreviated}, #{day.date}" %>
 
-                <div class="<%= "#{day.date}_total" %>">
-                  <%= "#{ day.mark_total}" %> 
+                <div class="<%= "#{day.date}_total small_total" %>">
+                   Total: <%= "#{ day.mark_total}" %> 
                 </div>
                 </a>
               <div id="panel<%=day.date.amjd.to_i%>" class="content <%= active %> small_panel">
