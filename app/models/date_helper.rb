@@ -10,7 +10,7 @@ class DateHelper
   attr_accessor :mark_total
 
   def to_date
-    date.strftime
+    date.strftime("%-m/%-d/%y")
   end
   def is_today?
     date == Time.current.to_date 

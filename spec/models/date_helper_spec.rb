@@ -27,9 +27,9 @@ describe DateHelper do
       date_helper = DateHelper.new(Date.new(2014, 6, 12))
       expect(date_helper.day_of_week_abbreviated).to eq("Thu")
     end
-    it "returns date in yyyy-mm-dd format" do
+    it "returns date in mm/dd/yy format" do
       date_helper = DateHelper.new(Date.new(2014, 6, 12))
-      expect(date_helper.to_date).to eq("2014-06-12")
+      expect(date_helper.to_date).to eq("6/12/14")
     end
   end
 end
