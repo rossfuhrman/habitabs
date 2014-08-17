@@ -53,7 +53,7 @@
                 <% @measured_habits.each do |habit| %>
                   <div class="row small_row">
                     <div class="small-6 large-4 columns">
-                      <div  class="<%=habit.polarity_class %>">
+                      <div  class="small_habit <%=habit.polarity_class %>">
                         <%= link_to habit.title, habit %>
                       </div>
                     </div>
