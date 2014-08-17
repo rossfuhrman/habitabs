@@ -84,10 +84,8 @@
             <th>Title</th>
             <% @date_range.days.each_with_index do |day, i| %>
               <th> 
-                <%= day.day_of_week %>
-                <br />
-                <%= day.date.to_date %>
-                <br />
+                <%= day.day_of_week_abbreviated %>
+                <%= day.to_date %>
               </th>
             <% end %>
           </tr>
@@ -127,9 +125,9 @@
           <tr>
             <th>Totals</th>
             <% @date_range.days.each_with_index do |day, i| %>
-              <th> <%= day.date.to_date %> 
+              <th> <%= day.to_date %> 
                 <div class="total <%= "#{day.date}_total" %>">
-                  <%= day.mark_total %>
+                  Total: <%= day.mark_total %>
                 </div>
               </th>
             <% end %>
@@ -143,10 +141,8 @@
             <th>Title</th>
             <% @date_range.days.each_with_index do |day, i| %>
               <th> 
-                <%= day.day_of_week %>
-                <br />
-                <%= day.date.to_date %>
-                <br />
+                <%= day.day_of_week_abbreviated %>
+                <%= day.to_date %>
               </th>
             <% end %>
           </tr>
