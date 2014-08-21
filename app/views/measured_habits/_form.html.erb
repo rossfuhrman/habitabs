@@ -32,7 +32,7 @@
   </div>
 
   <div class="field">
-    <span data-tooltip class="has-tip" title="The default is 'mark' and you would use that for indicating you did something on a day, such as drank coffee or exercised. The other options let you track things like riding your bike for 10.5 miles or running for 30 minutes. You can also track your weight over time. Specifying these alternate measurements will allow us to create some interesting graphs for you once you've entered some data.">Measurement</span>
+    <span data-tooltip class="has-tip" title="The default is 'mark' and you would use that for indicating you did something on a day, such as drank coffee or exercised. The other options let you track things like riding your bike for 10.5 miles or running for 30 minutes. You can also track your weight over time. Specifying these alternate measurements will allow for the creation of some interesting graphs for you once you've entered some data.">Measurement</span>
 
      <%= f.select :measurement_type, options_for_select(MeasuredHabit.measurement_options, :selected => f.object.measurement_type), :class => '' %>
   </div>
