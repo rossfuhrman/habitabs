@@ -7,6 +7,8 @@ gem 'pg'
 
 gem 'devise'
 
+gem 'wicked'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 

@@ -1,0 +1,69 @@
+<div class="row"> 
+  <div class="small-12 columns">
+    <h1>
+      Step 3: Measured Habits
+    </h1>
+    <h2>
+      You can easily add new habits at any time.
+    </h2>
+    <%= form_for(@measured_habit, :url => wizard_path, :method => :put) do |f| %>
+      <% if @measured_habit.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@measured_habit.errors.count, "error") %> prohibited this habit from being saved:</h2>
+
+          <ul>
+          <% @measured_habit.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+        <p>
+          You can also set up habits to track things like riding your bike for 10.5 miles or running for 30 minutes. You can also track your weight over time. Specifying these alternate measurements will allow for the creation of some interesting graphs for you once you've entered some data.
+        </p>
+        <p>
+          For now, let's just set up one.
+        </p>
+      <div class="field">
+
+        <label >Select the unit of measurement:</label>
+
+        <%= f.select :measurement_type, options_for_select(MeasuredHabit.measurement_options_for_account_setup, :selected => f.object.measurement_type), :class => '' %>
+      </div>
+      <br/>
+
+      <div class="field">
+        <label>
+          Give it a title:
+        </label><br>
+        <%= f.text_field :title %>
+      </div>
+
+      <div class="field">
+        <label>This habit is: </label><br>
+        <%= f.radio_button :polarity, MeasuredHabit::NEUTRAL  %> 
+        <label>Neutral</label>
+        <%= f.radio_button :polarity, MeasuredHabit::POSITIVE %>
+        <label>+ Positive</label>
+        <%= f.radio_button :polarity, MeasuredHabit::NEGATIVE %>
+        <label>- Negative</label>
+      </div>
+
+
+      <div class="actions">
+        <%= f.submit "Save", class: "button round" %>
+      </div>
+
+      <br />
+
+    <% end %>
+
+    <p>
+    Feel free to skip this step if you don't have any habits to measure in time/distance/etc right now. You can them at any time. 
+    </p>
+
+
+    <%= link_to 'Skip Step', next_wizard_path, class: "button round" %>
+  </div>
+</div>

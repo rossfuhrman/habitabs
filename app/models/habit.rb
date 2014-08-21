@@ -26,7 +26,6 @@ class Habit < ActiveRecord::Base
   POSITIVE = 1
   NEGATIVE = 2
 
-
   def mark_value count_of_marks
     return 0 if polarity == NEUTRAL
     return count_of_marks * -1 if polarity == NEGATIVE

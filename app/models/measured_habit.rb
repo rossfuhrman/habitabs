@@ -6,7 +6,11 @@ class MeasuredHabit < ActiveRecord::Base
   acts_as_list
 
   def self.measurement_options
-    ["Marks", "Minutes", "Hours", "Miles", "Meters", "Yards", "Kilometers", "Feet", "Pounds", "Kilograms", "Calories"]
+    ["Marks", "Minutes", "Hours", "Miles", "Meters", "Yards", "Kilometers", "Feet", "Pounds", "Kilograms", "Calories", "Other"]
+  end
+
+  def self.measurement_options_for_account_setup
+    measurement_options.reject{|option| option  == "Marks"}
   end
 
   def get_measurement_value date
