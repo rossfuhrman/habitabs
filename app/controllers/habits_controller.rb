@@ -39,7 +39,7 @@ class HabitsController < ApplicationController
 
   def sort
     params[:habit].each_with_index do |id, index|
-      Habit.update_all({position: index+1}, {id: id})
+      Habit.where(id: id).update_all({position: index+1})
     end
     render nothing: true
   end
