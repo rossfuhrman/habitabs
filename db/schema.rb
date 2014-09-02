@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724021621) do
+ActiveRecord::Schema.define(version: 20140829170846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,17 +38,26 @@ ActiveRecord::Schema.define(version: 20140724021621) do
 
   create_table "habits", force: true do |t|
     t.string   "title"
-    t.boolean  "private",          default: true
+    t.boolean  "private",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "polarity",         default: 0
+    t.integer  "polarity",    default: 0
     t.text     "description"
     t.integer  "position"
-    t.string   "measurement_type", default: "Marks"
   end
 
   add_index "habits", ["user_id"], name: "index_habits_on_user_id", using: :btree
+
+  create_table "journals", force: true do |t|
+    t.text     "entry"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "journals", ["user_id"], name: "index_journals_on_user_id", using: :btree
 
   create_table "marks", force: true do |t|
     t.date     "mark_date"
@@ -76,7 +85,6 @@ ActiveRecord::Schema.define(version: 20140724021621) do
     t.date     "measurement_date"
     t.decimal  "value",             precision: 10, scale: 4
     t.decimal  "decimal",           precision: 10, scale: 4
-    t.integer  "habit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "measured_habit_id"

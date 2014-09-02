@@ -15,6 +15,7 @@ class HabitsController < ApplicationController
     @habits = Habit.where(user_id: current_user.id).includes(:marks).order(:position)
     @measured_habits = MeasuredHabit.where(user_id: current_user.id).includes(:measurements).order(:position)
     @date_range = get_date_range
+    @journal_entries = Journal.where(user_id: current_user.id).where('date <= ?', @date_range.days.last.date).where('date >= ?', @date_range.days.first.date)
     @start_date_for_previous_link = get_start_date_for_previous_week_link @date_range
     @start_date_for_next_link = get_start_date_for_next_link @date_range
     get_mark_total_for_each_day

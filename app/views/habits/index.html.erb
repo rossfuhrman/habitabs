@@ -92,6 +92,22 @@
               <th> 
                 <%= day.day_of_week_abbreviated %>
                 <%= day.to_date %>
+                <% if day.in_the_future? %>
+                  <br />
+                  <br />
+                  <br />
+                <% else %>
+                  <br/>
+                  <% if @journal_entries.select{|f| f.date == day.date}.any? %>
+                    <%= link_to edit_journal_path(@journal_entries.select{|f| f.date == day.date}.first), title: "Edit Journal Entry" do %>
+                      <i class="general fi-pencil"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to new_journal_path(date: day.date), title: "New Journal Entry" do %>
+                    <i class="general fi-page-add"></i>
+                    <% end %>
+                  <% end %>
+                <% end %>
               </th>
             <% end %>
           </tr>
@@ -179,9 +195,6 @@
 
     <br>
 
-    <p>
-    <%= link_to 'Add a Habit', new_habit_path %>
-    </p>
     <p>
     <%= link_to 'Re-order habits', list_habits_path %>
     </p>

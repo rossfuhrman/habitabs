@@ -1,0 +1,27 @@
+<div class="row"> 
+  <div class="small-12 columns">
+    <h1>Listing journals</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @journals.each do |journal| %>
+          <tr>
+            <td><%= journal.date %></td>
+            <td><%= truncate(journal.entry, length: 50) %></td>
+            <td><%= link_to 'Show', journal %> | <%= link_to 'Edit', edit_journal_path(journal) %> | <%= link_to 'Delete', journal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+  </div>
+</div>
+

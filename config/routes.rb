@@ -16,6 +16,13 @@ Habits::Application.routes.draw do
   resources :marks
   resources :measurements
 
+  resources :journals do
+    collection do
+      match 'list', via: :get
+      match 'sort', via: :post
+    end
+  end
+
   resources :account_setup
 
   # The priority is based upon order of creation: first created -> highest priority.

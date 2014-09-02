@@ -4,8 +4,8 @@
 
     <%= render 'form' %>
 
-    <%= link_to 'Show', @habit %> |
-    <%= link_to 'Delete', @habit, method: :delete, data: { confirm: 'Are you sure?' } %> |
-    <%= link_to 'Dashboard', habits_path %> 
+    <%= link_to 'Show', @habit, class: "button round" %> |
+    <%= link_to 'Delete', @habit, method: :delete, data: { confirm: 'Are you sure?' , class: "button round"} %> |
+    <%= link_to 'Dashboard', habits_pat, class: "button round"h %> 
   </div>
 </div>

@@ -1,0 +1,30 @@
+<h1>Journal Entry For: <%= @journal.date %></h1>
+
+<%= form_for(@journal) do |f| %>
+  <% if @journal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@journal.errors.count, "error") %> prohibited this journal from being saved:</h2>
+
+      <ul>
+      <% @journal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :date %>
+  </div>
+
+
+  <br />
+  <div class="field">
+    <%= f.text_area :entry, rows: 15 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Save", class: "button round" %>
+    <%= link_to "Cancel", "/", class: "button round" %>
+  </div>
+<% end %>
