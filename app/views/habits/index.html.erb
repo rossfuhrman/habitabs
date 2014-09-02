@@ -24,6 +24,19 @@
                   <div style="float:right">
   </div>
                 <div id="panel<%=day.date.amjd.to_i%>" class="content <%= active %> small_panel">
+                  <% if @journal_entries.select{|f| f.date == day.date}.any? %>
+                    <%= link_to edit_journal_path(@journal_entries.select{|f| f.date == day.date}.first), title: "Edit Journal Entry" do %>
+                      <i class="fi-pencil"></i>
+                      Edit Journal Entry
+                      <hr />
+                    <% end %>
+                  <% else %>
+                    <%= link_to new_journal_path(date: day.date), title: "New Journal Entry" do %>
+                      <i class="fi-page-add"></i>
+                      Add Journal Entry
+                      <hr />
+                    <% end %>
+                  <% end %>
                   <% @habits.each do |habit| %>
 
                     <div class="row small_row">
