@@ -14,64 +14,65 @@
 
         <% active = "active" %>
         <% @date_range.days.reverse.each_with_index do |day, i| %>
-          <dd>
-            <% unless day.in_the_future? %>
-              <a href="#panel<%=day.date.amjd.to_i%>"><%= "#{day.day_of_week_abbreviated}, #{day.to_date}" %>
+          <% unless day.in_the_future? %>
+            <dd>
+                <a href="#panel<%=day.date.amjd.to_i%>"><%= "#{day.day_of_week_abbreviated}, #{day.to_date}" %>
+                  <div class="<%= "#{day.date}_total small_total" %>">
+                    Total: <%= "#{ day.mark_total}" %> 
+                  </div>
+                  </a>
+                  <div style="float:right">
+  </div>
+                <div id="panel<%=day.date.amjd.to_i%>" class="content <%= active %> small_panel">
+                  <% @habits.each do |habit| %>
 
-                <div class="<%= "#{day.date}_total small_total" %>">
-                   Total: <%= "#{ day.mark_total}" %> 
+                    <div class="row small_row">
+                      <div class="small-6 large-4 columns">
+                        <div  class="small_habit <%=habit.polarity_class %>">
+                          <%= link_to habit.title, habit %>
+                        </div>
+                      </div>
+                      <div class="small-2 large-4 columns">
+                        <div style=" " class="add_mark" data-id="<%=habit.id %>" data-date="<%= day.date %>">
+                          <i class="general fi-plus">
+                          </i>
+
+                        </div>
+                      </div>
+                      <div class="small-2 large-2 columns">
+                        <div class="count <%=habit.polarity_class %>-count" id="<%="#{habit.id}#{day.date}"%>"> 
+                          <%= habit.mark_total day.date %>
+                        </div>
+                      </div>
+                      <div class="small-2 large-2 columns">
+                        <div style="" class="destroy_mark" data-id="<%=habit.id %>" data-date="<%= day.date %>">
+                          <i class="general fi-minus">
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+
+                  <% @measured_habits.each do |habit| %>
+                    <div class="row small_row">
+                      <div class="small-6 large-4 columns">
+                        <div  class="small_habit <%=habit.polarity_class %>">
+                          <%= link_to habit.title, habit %>
+                        </div>
+                      </div>
+                      <div class="small-2 large-4 columns"> &nbsp; </div>
+                      <div class="small-2 large-2 columns">
+                        <div class="add_measurement <%=habit.polarity_class %>-count" data-id="<%=habit.id %>" data-date="<%= day.date %>" id="<%="#{habit.id}#{day.date}"%>"> 
+                          <input id="foo" value="<%= habit.get_measurement_value day.date %>" size="8" />
+                        </div>
+                      </div>
+                      <div class="small-2 large-2 columns"> &nbsp; </div>
+                    </div>
+                  <% end %>
+
                 </div>
-                </a>
-              <div id="panel<%=day.date.amjd.to_i%>" class="content <%= active %> small_panel">
-                <% @habits.each do |habit| %>
-
-                  <div class="row small_row">
-                    <div class="small-6 large-4 columns">
-                      <div  class="small_habit <%=habit.polarity_class %>">
-                        <%= link_to habit.title, habit %>
-                      </div>
-                    </div>
-                    <div class="small-2 large-4 columns">
-                      <div style=" " class="add_mark" data-id="<%=habit.id %>" data-date="<%= day.date %>">
-                        <i class="general fi-plus">
-                        </i>
-
-                      </div>
-                    </div>
-                    <div class="small-2 large-2 columns">
-                      <div class="count <%=habit.polarity_class %>-count" id="<%="#{habit.id}#{day.date}"%>"> 
-                        <%= habit.mark_total day.date %>
-                      </div>
-                    </div>
-                    <div class="small-2 large-2 columns">
-                      <div style="" class="destroy_mark" data-id="<%=habit.id %>" data-date="<%= day.date %>">
-                        <i class="general fi-minus">
-                        </i>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-
-                <% @measured_habits.each do |habit| %>
-                  <div class="row small_row">
-                    <div class="small-6 large-4 columns">
-                      <div  class="small_habit <%=habit.polarity_class %>">
-                        <%= link_to habit.title, habit %>
-                      </div>
-                    </div>
-                    <div class="small-2 large-4 columns"> &nbsp; </div>
-                    <div class="small-2 large-2 columns">
-                      <div class="add_measurement <%=habit.polarity_class %>-count" data-id="<%=habit.id %>" data-date="<%= day.date %>" id="<%="#{habit.id}#{day.date}"%>"> 
-                        <input id="foo" value="<%= habit.get_measurement_value day.date %>" size="8" />
-                      </div>
-                    </div>
-                    <div class="small-2 large-2 columns"> &nbsp; </div>
-                  </div>
-                <% end %>
-
-              </div>
-            <% end %>
-          </dd>
+            </dd>
+          <% end %>
           <% active = "" %>
         <% end %>
 
