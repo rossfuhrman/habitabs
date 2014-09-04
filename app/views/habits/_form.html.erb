@@ -40,11 +40,12 @@
   </div>
   <br/>
 
-  <div class="actions">
     <%= f.submit "Save", class: "button round" %>
-    <%= link_to "Cancel", "/", class: "button round" %>
-  </div>
+    <% if @habit.id %>
+      <%= link_to 'Cancel', @habit, class: "button round" %> 
+    <% else %>
+      <%= link_to "Cancel", "/", class: "button round" %>
+    <% end %>
 
-  <br />
 
 <% end %>
