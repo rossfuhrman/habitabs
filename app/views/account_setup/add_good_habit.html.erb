@@ -1,60 +1,56 @@
-<div class="row"> 
-  <div class="small-12 columns">
-    <h1>
-      Step 1: Select some good habits
-    </h1>
-    <h2>
-      You can easily add new habits at any time.
-    </h2>
-    <%= form_for(@habit, :url => wizard_path, :method => :put) do |f| %>
-      <% if @habit.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@habit.errors.count, "error") %> prohibited this habit from being saved:</h2>
+<h1>
+  Step 1: Select some good habits
+</h1>
+<h2>
+  You can easily add new habits at any time.
+</h2>
+<%= form_for(@habit, :url => wizard_path, :method => :put) do |f| %>
+  <% if @habit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@habit.errors.count, "error") %> prohibited this habit from being saved:</h2>
 
-          <ul>
-          <% @habit.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-          </ul>
-        </div>
+      <ul>
+      <% @habit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 
-      <p>
-        Select from a few of the most popular positive habits to track.
-        <br />
-        (titles can be changed later if they aren't quite right) 
-      </p>
-      <div class="field">
+  <p>
+    Select from a few of the most popular positive habits to track.
+    <br />
+    (titles can be changed later if they aren't quite right) 
+  </p>
+  <div class="field">
 
-        <%= check_box_tag 'habit[wizard_titles][]', 'Exercise' %>
-        <label>Exercise</label>
-        <br />
+    <%= check_box_tag 'habit[wizard_titles][]', 'Exercise' %>
+    <label>Exercise</label>
+    <br />
 
-        <%= check_box_tag 'habit[wizard_titles][]', 'Study New Language' %>
-        <label>Study New Language</label>
-        <br />
+    <%= check_box_tag 'habit[wizard_titles][]', 'Study New Language' %>
+    <label>Study New Language</label>
+    <br />
 
-        <%= check_box_tag 'habit[wizard_titles][]', 'Practice Instrument' %>
-        <label>Practice Instrument</label>
-        <br />
+    <%= check_box_tag 'habit[wizard_titles][]', 'Practice Instrument' %>
+    <label>Practice Instrument</label>
+    <br />
 
-      </div>
-
-      <br/>
-
-      <div class="actions">
-        <%= f.submit "Save", class: "button round" %>
-      </div>
-
-      <br />
-
-    <% end %>
-
-    <p>
-      Feel free to skip this step if none of these habits interest you.
-    </p>
-
-    <%= link_to 'Skip Step', next_wizard_path, class: "button round" %>
   </div>
-</div>
+
+  <br/>
+
+  <div class="actions">
+    <%= f.submit "Save", class: "button round" %>
+  </div>
+
+  <br />
+
+<% end %>
+
+<p>
+  Feel free to skip this step if none of these habits interest you.
+</p>
+
+<%= link_to 'Skip Step', next_wizard_path, class: "button round" %>

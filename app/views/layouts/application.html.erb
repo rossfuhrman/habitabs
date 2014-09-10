@@ -51,18 +51,24 @@
 
 
   <div id="container">
-  <p class="notice"><%= notice %></p> 
-  <p class="alert"><%= alert %></p>
+    <p class="notice"><%= notice %></p> 
+    <p class="alert"><%= alert %></p>
 
-<%= yield %>
+    <div class="row"> 
+      <div class="small-12 columns">
+        <%= yield %>
+      </div>
+    </div>
   </div>
 <div class="row"> 
   <div class="small-12 columns">
-    <hr />
-    <%= link_to "Dashboard", "/" %> |
-    <%= link_to 'Add a Habit', new_habit_path %> | 
-    <%= link_to 'Journal', journals_path %>
-    <hr />
+    <% if current_user %>
+      <hr />
+      <%= link_to "Dashboard", "/" %> |
+      <%= link_to 'Add a Habit', new_habit_path %> | 
+      <%= link_to 'Journal', journals_path %>
+      <hr />
+    <% end %>
   </div>
 </div>
 

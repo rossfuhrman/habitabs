@@ -1,11 +1,7 @@
-<div class="row"> 
-  <div class="small-12 columns">
-    <h1>Editing habit</h1>
+<h1>Editing habit</h1>
 
-    <%= render 'form' %>
+<%= render 'form' %>
 
-    <%= link_to 'Show', @measured_habit %> |
-    <%= link_to 'Delete', @measured_habit, method: :delete, data: { confirm: 'Are you sure?' } %> |
-    <%= link_to 'Dashboard', habits_path %> 
-  </div>
-</div>
+<%= link_to 'Show', @measured_habit %> |
+<%= link_to 'Delete', @measured_habit, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Dashboard', habits_path %> 

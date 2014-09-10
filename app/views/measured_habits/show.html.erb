@@ -1,50 +1,43 @@
-<div class="row"> 
-  <div class="small-12 columns">
-    <p>
-    <strong>Title:</strong>
-    <%= @measured_habit.title %>
-    </p>
+<p>
+<strong>Title:</strong>
+<%= @measured_habit.title %>
+</p>
 
-    <p>
-    <strong>Polarity:</strong>
-    <%= @measured_habit.polarity_class.capitalize %>
-    </p>
+<p>
+<strong>Polarity:</strong>
+<%= @measured_habit.polarity_class.capitalize %>
+</p>
 
-    <p>
-    <strong>Description:</strong>
-    <%= @measured_habit.description %>
-    </p>
+<p>
+<strong>Description:</strong>
+<%= @measured_habit.description %>
+</p>
 
-    <%= link_to 'Edit', edit_measured_habit_path(@measured_habit) %> |
-    <%= link_to 'Delete', @measured_habit, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Edit', edit_measured_habit_path(@measured_habit) %> |
+<%= link_to 'Delete', @measured_habit, method: :delete, data: { confirm: 'Are you sure?' } %>
 
-    <br />
-    <br />
+<br />
+<br />
 
-    <%= link_to "< Previous", date: @date.prev_month %>
-    | <%= @date.strftime("%B %Y") %> | 
-    <%= link_to " Next >", date: @date.next_month %>
+<%= link_to "< Previous", date: @date.prev_month %>
+| <%= @date.strftime("%B %Y") %> | 
+<%= link_to " Next >", date: @date.next_month %>
 
-    <br />
-    <br />
+<br />
+<br />
 
-    <div id="habits">
-      <%= calendar @date do |date| %>
-        <%= date.day %>
-        <ul class="<%=@measured_habit.polarity_class %>" >
-          <li>
-            <%= @measured_habit.get_measurement_value date %>
-          </li>
-        </ul>
-      <% end %>
-    </div>
-
-    <p>
-    <%= link_to 'Dashboard', habits_path %> | 
-    <%= link_to 'Add a Habit', new_habit_path %>
-    </p>
-
-
-  </div>
+<div id="habits">
+  <%= calendar @date do |date| %>
+    <%= date.day %>
+    <ul class="<%=@measured_habit.polarity_class %>" >
+      <li>
+        <%= @measured_habit.get_measurement_value date %>
+      </li>
+    </ul>
+  <% end %>
 </div>
 
+<p>
+<%= link_to 'Dashboard', habits_path %> | 
+<%= link_to 'Add a Habit', new_habit_path %>
+</p>
