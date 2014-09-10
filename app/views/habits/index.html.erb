@@ -169,40 +169,43 @@
     </tfoot>
   </table>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <% @date_range.days.each_with_index do |day, i| %>
-          <th> 
-            <%= day.day_of_week_abbreviated %>
-            <%= day.to_date %>
-          </th>
-        <% end %>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @measured_habits.each do |habit| %>
+  <% if @measured_habits.any? %>
+    <table>
+      <thead>
         <tr>
-          <td > 
-            <div  class="habit <%=habit.polarity_class %>">
-              <%= link_to habit.title, habit %>
-            </div>
-          </td>
+          <th>Title</th>
           <% @date_range.days.each_with_index do |day, i| %>
-            <td>
-            
-              <% unless day.in_the_future? %>
-                  <div class="add_measurement <%=habit.polarity_class %>-count" data-id="<%=habit.id %>" data-date="<%= day.date %>" id="<%="#{habit.id}#{day.date}"%>"> 
-                  <input id="foo" value="<%= habit.get_measurement_value day.date %>" size="8" />
-                </div>
-              <% end %>
-            </td>
+            <th> 
+              <%= day.day_of_week_abbreviated %>
+              <%= day.to_date %>
+            </th>
           <% end %>
         </tr>
-      <% end %>
-    </tbody>
+      </thead>
+
+      <tbody>
+        <% @measured_habits.each do |habit| %>
+          <tr>
+            <td > 
+              <div  class="habit <%=habit.polarity_class %>">
+                <%= link_to habit.title, habit %>
+              </div>
+            </td>
+            <% @date_range.days.each_with_index do |day, i| %>
+              <td>
+              
+                <% unless day.in_the_future? %>
+                    <div class="add_measurement <%=habit.polarity_class %>-count" data-id="<%=habit.id %>" data-date="<%= day.date %>" id="<%="#{habit.id}#{day.date}"%>"> 
+                    <input id="foo" value="<%= habit.get_measurement_value day.date %>" size="8" />
+                  </div>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>  
 
 <br>
