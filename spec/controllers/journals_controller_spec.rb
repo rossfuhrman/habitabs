@@ -19,11 +19,12 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe JournalsController do
+  login_user
 
   # This should return the minimal set of attributes required to create a valid
   # Journal. As you add validations to Journal, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { {  } }
+  let(:valid_attributes) { { :entry => "The journal entry", :date => Time.current.to_date, :user_id => 1 } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -85,14 +86,14 @@ describe JournalsController do
       it "assigns a newly created but unsaved journal as @journal" do
         # Trigger the behavior that occurs when invalid params are submitted
         Journal.any_instance.stub(:save).and_return(false)
-        post :create, {:journal => {  }}, valid_session
+        post :create, {:journal => { :user_id => 1 }}, valid_session
         assigns(:journal).should be_a_new(Journal)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Journal.any_instance.stub(:save).and_return(false)
-        post :create, {:journal => {  }}, valid_session
+        post :create, {:journal => { :user_id => 1 }}, valid_session
         response.should render_template("new")
       end
     end
@@ -106,8 +107,8 @@ describe JournalsController do
         # specifies that the Journal created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Journal.any_instance.should_receive(:update).with({ "these" => "params" })
-        put :update, {:id => journal.to_param, :journal => { "these" => "params" }}, valid_session
+        Journal.any_instance.should_receive(:update).with({ "entry" => "The journal entry", "user_id" => 1  })
+        put :update, {:id => journal.to_param, :journal => { "entry" => "The journal entry", "user_id" => 1  }}, valid_session
       end
 
       it "assigns the requested journal as @journal" do
@@ -128,7 +129,7 @@ describe JournalsController do
         journal = Journal.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Journal.any_instance.stub(:save).and_return(false)
-        put :update, {:id => journal.to_param, :journal => {  }}, valid_session
+        put :update, {:id => journal.to_param, :journal => { :user_id => 1 }}, valid_session
         assigns(:journal).should eq(journal)
       end
 
@@ -136,7 +137,7 @@ describe JournalsController do
         journal = Journal.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Journal.any_instance.stub(:save).and_return(false)
-        put :update, {:id => journal.to_param, :journal => {  }}, valid_session
+        put :update, {:id => journal.to_param, :journal => { :user_id => 1 }}, valid_session
         response.should render_template("edit")
       end
     end
