@@ -118,6 +118,7 @@
             <% end %>
           </th>
         <% end %>
+        <th>S</th>
       </tr>
     </thead>
 
@@ -148,6 +149,9 @@
               <% end %>
             </td>
           <% end %>
+          <td>
+            <%= habit.streak.streak_duration %>
+          </td>
         </tr>
       <% end %>
     </tbody>
