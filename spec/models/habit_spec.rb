@@ -144,4 +144,13 @@ describe Habit do
       end
     end
   end
+  it "knows about its streak" do
+    @user = FactoryGirl.create(:user)
+    @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
+    Mark.create(mark_date: Date.today - 99, habit: @positive_habit)
+    Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
+    Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
+    expect(@positive_habit.streak.streak_duration).to eq(2)
+    expect(Streak.new(@positive_habit).status).to eq(Streak::YESTERDAY)
+  end
 end

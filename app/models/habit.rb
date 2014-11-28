@@ -9,6 +9,10 @@ class Habit < ActiveRecord::Base
 
   acts_as_list
 
+  def streak
+    @streak ||= Streak.new self
+  end
+
   #this is for a singular habit that hasn't :include marks
   #and it is for a specific date
   #the mark_total has a habit that has all the marks included anyways
