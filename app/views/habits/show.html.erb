@@ -13,6 +13,11 @@
 <%= @habit.description %>
 </p>
 
+<p>
+<strong>Current Streak:</strong>
+<%= @habit.streak.streak_duration %>
+</p>
+
 <%= link_to 'Edit', edit_habit_path(@habit), class: "button round" %> 
 <%= link_to 'Delete', @habit, method: :delete, data: { confirm: 'Are you sure you want to delete this habit and all the data associated with it?'}, class: "button round" %>
 
