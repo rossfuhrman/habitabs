@@ -3,6 +3,10 @@ class Habit < ActiveRecord::Base
   belongs_to :user
   has_many :marks , :dependent => :destroy
 
+  NEUTRAL = 0
+  POSITIVE = 1
+  NEGATIVE = 2
+
   acts_as_list
 
   #this is for a singular habit that hasn't :include marks
@@ -21,10 +25,6 @@ class Habit < ActiveRecord::Base
     the_count = marks.select{|m| m.mark_date == an_date}.count
     the_count == 0 ? "" : the_count 
   end
-
-  NEUTRAL = 0
-  POSITIVE = 1
-  NEGATIVE = 2
 
   def mark_value count_of_marks
     return 0 if polarity == NEUTRAL
