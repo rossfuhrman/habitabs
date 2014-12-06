@@ -12,8 +12,12 @@ class Streak
   def streak_duration
     @streak_duration
   end
+  
+  #oh yeah, I want to use the value to do something in the UI
+  #to indicate this streak is in progress or not
+  #but I am not currently doing that
   def status
-    return BROKEN if streak_duration == 0
+    return BROKEN if streak_duration == ""
     latest = @marks_by_date.last
     latest.mark_date == Date.today ? TODAY : YESTERDAY
   end
@@ -40,6 +44,6 @@ class Streak
         break
       end
     end
-    count
+    count == 0 ? "" : count
   end
 end

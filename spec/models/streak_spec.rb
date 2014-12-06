@@ -6,8 +6,8 @@ describe Streak do
       @user = FactoryGirl.create(:user)
       @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
     end
-    it "has a streak of 0" do
-      expect(Streak.new(@positive_habit).streak_duration).to eq(0)
+    it "has no streak represented as empty string" do
+      expect(Streak.new(@positive_habit).streak_duration).to eq("")
     end
     it "has a status of broken" do
       expect(Streak.new(@positive_habit).status).to eq(Streak::BROKEN)
@@ -98,11 +98,11 @@ describe Streak do
   end
   describe "habit with marks" do
     describe "but no marks yesterday or today" do
-      it "has a broken streak with a count of 0" do
+      it "has a broken streak" do
         @user = FactoryGirl.create(:user)
         @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
         Mark.create(mark_date: Date.today - 99, habit: @positive_habit)
-        expect(Streak.new(@positive_habit).streak_duration).to eq(0)
+        expect(Streak.new(@positive_habit).streak_duration).to eq("")
         expect(Streak.new(@positive_habit).status).to eq(Streak::BROKEN)
       end
     end
@@ -134,12 +134,12 @@ describe Streak do
         end
       end
       describe "and most recent is old" do
-        it "has a streak of zero" do
+        it "has no streak" do
           @user = FactoryGirl.create(:user)
           @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
           Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
           Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-          expect(Streak.new(@positive_habit).streak_duration).to eq(0)
+          expect(Streak.new(@positive_habit).streak_duration).to eq("")
           expect(Streak.new(@positive_habit).status).to eq(Streak::BROKEN)
         end
       end
