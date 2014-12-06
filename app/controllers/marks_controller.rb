@@ -7,7 +7,7 @@ class MarksController < ApplicationController
         #format.json { render action: 'show', status: :created, location: @mark }
         habits = Habit.where(user_id: current_user.id).includes(:marks)
         mark_total_for_day = habits.map{|habit| habit.mark_sum_for mark_params[:mark_date].to_date}.inject(0, :+)
-        format.json { render :json => {:habit_mark_count => @mark.habit.marks_on_date(mark_params[:mark_date]), :day_total => mark_total_for_day  } }
+        format.json { render :json => {:habit_mark_count => @mark.habit.marks_on_date(mark_params[:mark_date]), :day_total => mark_total_for_day, :streak_duration => @mark.habit.streak.streak_duration  } }
       else
         format.html { render action: 'new' }
         format.json { render json: @mark.errors, status: :unprocessable_entity }
@@ -30,7 +30,7 @@ class MarksController < ApplicationController
         #format.html { redirect_to @mark, notice: 'Mark was successfully created.' }
         habits = Habit.where(user_id: current_user.id).includes(:marks)
         mark_total_for_day = habits.map{|habit| habit.mark_sum_for params[:mark][:mark_date].to_date}.inject(0, :+)
-        format.json { render :json => {:habit_mark_count => mark_count, :day_total => mark_total_for_day } }
+        format.json { render :json => {:habit_mark_count => mark_count, :day_total => mark_total_for_day, :streak_duration => habit.streak.streak_duration } }
       #else
       #  format.html { render action: 'new' }
       #  format.json { render json: @mark.errors, status: :unprocessable_entity }

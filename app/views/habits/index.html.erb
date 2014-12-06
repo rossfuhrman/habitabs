@@ -150,7 +150,9 @@
             </td>
           <% end %>
           <td>
-            <%= habit.streak.streak_duration %>
+            <div class="count <%=habit.polarity_class %>-count" id="<%="#{habit.id}"%>-streak-duration"> 
+              <%= habit.streak.streak_duration %>
+            </div>
           </td>
         </tr>
       <% end %>

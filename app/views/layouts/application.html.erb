@@ -105,6 +105,7 @@
                 // Animation complete.
               });
               $("." + String(mark_date) + "_total").text("Total: " + returned_value.day_total);
+              $("#" + habit_id + "-streak-duration").text(returned_value.streak_duration);
             }
           //}
         });
@@ -138,6 +139,7 @@
               });
             //}
               $("." + String(mark_date) + "_total").text("Total: " + returned_value.day_total);
+              $("#" + habit_id + "-streak-duration").text(returned_value.streak_duration);
           }
         })
     });
