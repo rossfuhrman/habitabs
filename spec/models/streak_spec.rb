@@ -18,7 +18,7 @@ describe Streak do
       before(:each) do
         @user = FactoryGirl.create(:user)
         @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-        Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
       end
       it "has a streak of 1" do
         expect(Streak.new(@positive_habit).streak_duration).to eq(1)
@@ -31,8 +31,8 @@ describe Streak do
       before(:each) do
         @user = FactoryGirl.create(:user)
         @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-        Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-        Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
       end
       it "has a streak of 2" do
         expect(Streak.new(@positive_habit).streak_duration).to eq(2)
@@ -47,7 +47,7 @@ describe Streak do
       before(:each) do
         @user = FactoryGirl.create(:user)
         @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-        Mark.create(mark_date: Date.today, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date, habit: @positive_habit)
       end
       it "has a streak of 1" do
         expect(Streak.new(@positive_habit).streak_duration).to eq(1)
@@ -60,8 +60,8 @@ describe Streak do
       before(:each) do
         @user = FactoryGirl.create(:user)
         @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-        Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
-        Mark.create(mark_date: Date.today, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date, habit: @positive_habit)
       end
       it "has a streak of 2" do
         expect(Streak.new(@positive_habit).streak_duration).to eq(2)
@@ -76,9 +76,9 @@ describe Streak do
       it "only counts consecutive days from yesterday back" do
         @user = FactoryGirl.create(:user)
         @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-        Mark.create(mark_date: Date.today - 99, habit: @positive_habit)
-        Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-        Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 99, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
         expect(Streak.new(@positive_habit).streak_duration).to eq(2)
         expect(Streak.new(@positive_habit).status).to eq(Streak::YESTERDAY)
       end
@@ -87,10 +87,10 @@ describe Streak do
       it "only counts consecutive days from today back" do
         @user = FactoryGirl.create(:user)
         @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-        Mark.create(mark_date: Date.today - 99, habit: @positive_habit)
-        Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-        Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
-        Mark.create(mark_date: Date.today, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 99, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date, habit: @positive_habit)
         expect(Streak.new(@positive_habit).streak_duration).to eq(3)
         expect(Streak.new(@positive_habit).status).to eq(Streak::TODAY)
       end
@@ -101,7 +101,7 @@ describe Streak do
       it "has a broken streak" do
         @user = FactoryGirl.create(:user)
         @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-        Mark.create(mark_date: Date.today - 99, habit: @positive_habit)
+        Mark.create(mark_date: Time.current.to_date - 99, habit: @positive_habit)
         expect(Streak.new(@positive_habit).streak_duration).to eq("")
         expect(Streak.new(@positive_habit).status).to eq(Streak::BROKEN)
       end
@@ -111,12 +111,12 @@ describe Streak do
         it "only increments by one for that day" do
           @user = FactoryGirl.create(:user)
           @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-          Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-          Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-          Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
-          Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
-          Mark.create(mark_date: Date.today, habit: @positive_habit)
-          Mark.create(mark_date: Date.today, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date, habit: @positive_habit)
           expect(Streak.new(@positive_habit).streak_duration).to eq(3)
           expect(Streak.new(@positive_habit).status).to eq(Streak::TODAY)
         end
@@ -125,10 +125,10 @@ describe Streak do
         it "only increments by one for that day" do
           @user = FactoryGirl.create(:user)
           @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-          Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-          Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-          Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
-          Mark.create(mark_date: Date.today - 1, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 1, habit: @positive_habit)
           expect(Streak.new(@positive_habit).streak_duration).to eq(2)
           expect(Streak.new(@positive_habit).status).to eq(Streak::YESTERDAY)
         end
@@ -137,8 +137,8 @@ describe Streak do
         it "has no streak" do
           @user = FactoryGirl.create(:user)
           @positive_habit = Habit.create title: "an title", user: @user, polarity: Habit::POSITIVE
-          Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
-          Mark.create(mark_date: Date.today - 2, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
+          Mark.create(mark_date: Time.current.to_date - 2, habit: @positive_habit)
           expect(Streak.new(@positive_habit).streak_duration).to eq("")
           expect(Streak.new(@positive_habit).status).to eq(Streak::BROKEN)
         end

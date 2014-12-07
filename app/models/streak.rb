@@ -19,7 +19,7 @@ class Streak
   def status
     return BROKEN if streak_duration == ""
     latest = @marks_by_date.last
-    latest.mark_date == Date.today ? TODAY : YESTERDAY
+    latest.mark_date == Time.current.to_date ? TODAY : YESTERDAY
   end
 
   private
@@ -29,13 +29,13 @@ class Streak
     marks_reversed = @marks_by_date.reverse
     #we have to handle today separately because a streak is considered 'active'
     #if the latest mark is today or yesterday
-    if marks_reversed.any? && marks_reversed.first.mark_date == Date.today
+    if marks_reversed.any? && marks_reversed.first.mark_date == Time.current.to_date
       count += 1
       marks_reversed.shift
     end
     #now we can loop through the remaining unique marks 
     #and look for the first gap
-    date_to_check = Date.today - 1
+    date_to_check = Time.current.to_date - 1
     marks_reversed.each do |mark|
       if mark.mark_date == date_to_check
         count += 1
