@@ -83,11 +83,11 @@ Habits::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => 'app.habitabs.com' }
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
+    :address              => "mail.dreamhost.com",
     :port                 => 587,
-    :domain               => 'gmail.com',
-    :user_name            => 'habitabsapp@gmail.com',
-    :password             => ENV['GMAIL_PASSWORD'],
+    :domain               => 'habitabs.com',
+    :user_name            => 'ross@habitabs.com',
+    :password             => ENV['HABITABS_EMAIL_PASSWORD'],
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 end
