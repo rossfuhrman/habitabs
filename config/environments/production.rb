@@ -83,11 +83,14 @@ Habits::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => 'app.habitabs.com' }
   config.action_mailer.smtp_settings = {
-    :address              => "mail.dreamhost.com",
+    :address              => "mail.habitabs.com",
     :port                 => 587,
     :domain               => 'habitabs.com',
+    :authentication       => :login,
     :user_name            => 'ross@habitabs.com',
-    :password             => ENV['HABITABS_EMAIL_PASSWORD'],
-    :authentication       => 'plain',
-    :enable_starttls_auto => true  }
+    :password             => ENV['HABITABS_EMAIL_PASSWORD']
+  }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_charset = 'utf-8'
 end
