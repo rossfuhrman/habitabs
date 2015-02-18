@@ -88,7 +88,8 @@ Habits::Application.configure do
     :domain               => 'habitabs.com',
     :authentication       => :login,
     :user_name            => 'ross@habitabs.com',
-    :password             => ENV['HABITABS_EMAIL_PASSWORD']
+    :password             => ENV['HABITABS_EMAIL_PASSWORD'],
+    :enable_starttls_auto => false
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
