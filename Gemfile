@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
+ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.9'
+gem 'rails', '4.1.14'
 
 gem 'pg'
 
@@ -59,8 +60,9 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
   gem 'factory_girl_rails', '~> 4.2.1'
-  gem 'guard-rspec'
-  gem 'spork-rails', github: 'sporkrb/spork-rails'
+  #There were install issues with these two gems when moving to ruby 2.2.1.
+  #gem 'guard-rspec'
+  #gem 'spork-rails', github: 'sporkrb/spork-rails'
 end
 
 group :test do
