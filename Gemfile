@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.1'
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.14'
@@ -63,6 +63,7 @@ group :development, :test do
   #There were install issues with these two gems when moving to ruby 2.2.1.
   #gem 'guard-rspec'
   #gem 'spork-rails', github: 'sporkrb/spork-rails'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :test do
