@@ -3,10 +3,6 @@ class Habit < ActiveRecord::Base
   belongs_to :user
   has_many :marks , :dependent => :destroy
 
-  NEUTRAL = 0
-  POSITIVE = 1
-  NEGATIVE = 2
-
   acts_as_list
 
   def streak
@@ -42,9 +38,6 @@ class Habit < ActiveRecord::Base
   end
 
   def polarity_class
-    return "positive" if polarity == POSITIVE
-    return "negative" if polarity == NEGATIVE
-    "neutral"
+    Polarity.polarity_class polarity
   end
-
 end

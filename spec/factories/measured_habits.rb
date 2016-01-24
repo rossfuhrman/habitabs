@@ -2,12 +2,12 @@
 
 FactoryGirl.define do
   factory :measured_habit do
+		user
     title "MyString"
     private false
-    references ""
     polarity 1
     description "MyText"
-    postion 1
+    position 1
     measurement_type "MyString"
   end
 end

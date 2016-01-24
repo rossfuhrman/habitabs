@@ -14,23 +14,15 @@ class MeasuredHabit < ActiveRecord::Base
   end
 
   def get_measurement_value date
-    foo = measurements.select{|m| m.measurement_date == date}
-    if foo.any?
-      foo.first.value
-    else
-      return ""
-    end
+    measurements_on_date = measurements.select{|m| m.measurement_date == date}
+    value = if measurements_on_date.any?
+              measurements_on_date.first.value
+            else
+              ""
+            end
   end
 
-  #duplicated from habit.rb :( :( :(
   def polarity_class
-    return "positive" if polarity == POSITIVE
-    return "negative" if polarity == NEGATIVE
-    "neutral"
+    Polarity.polarity_class polarity
   end
-
-  #duplicated from habit.rb :( :( :(
-  NEUTRAL = 0
-  POSITIVE = 1
-  NEGATIVE = 2
 end
