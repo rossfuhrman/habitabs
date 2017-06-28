@@ -35,7 +35,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'foundation-rails'
+gem 'foundation-rails', '5.5.3.2'
 
 gem 'acts_as_list' #added so we can sort the habits
 
