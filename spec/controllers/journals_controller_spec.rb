@@ -156,6 +156,15 @@ describe JournalsController do
       delete :destroy, {:id => journal.to_param}, valid_session
       response.should redirect_to(journals_url)
     end
+
+    describe "attempt to delete other users journal" do
+      it "raises error when trying to delete someone elses journal entry" do
+        other_users_journal = FactoryGirl.create(:other_users_journal)
+        expect {
+          delete :destroy, {:id => other_users_journal.to_param}, valid_session
+        }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
   end
 
 end
