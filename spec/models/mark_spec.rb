@@ -29,7 +29,7 @@ describe Mark do
       habit.save!
       mark = Mark.create( habit_id: habit.id,
                       mark_date: Date.today + 1)
-      expect(mark.habit).should eq(habit)
+      expect(mark.habit).to eq(habit)
     end
   end
 end
