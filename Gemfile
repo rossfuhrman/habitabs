@@ -55,6 +55,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
+  gem 'rake', '< 11.0' #rspec-rails needs to be updated, but until then, pin the rake version
   gem 'factory_girl_rails', '~> 4.2.1'
   #There were install issues with these two gems when moving to ruby 2.2.1.
   #gem 'guard-rspec'
