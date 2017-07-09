@@ -32,7 +32,7 @@ class MeasuredHabitsController < ApplicationController
   private
 
     def set_measured_habit
-      @measured_habit = MeasuredHabit.find(params[:id])
+      @measured_habit = current_user.measured_habits.find(params[:id])
     end
 
     def measured_habit_params

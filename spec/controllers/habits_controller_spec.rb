@@ -197,6 +197,14 @@ describe HabitsController do
   end
 
   describe "DELETE destroy" do
+
+    it "raises error when trying to delete someone else's habit" do
+      other_users_habit = FactoryGirl.create(:other_users_habit)
+      expect {
+        delete :destroy, {:id => other_users_habit.to_param}
+      }.to raise_error ActiveRecord::RecordNotFound
+    end
+
     it "destroys the requested habit" do
       expect {
         delete :destroy, {:id => @habit.to_param}

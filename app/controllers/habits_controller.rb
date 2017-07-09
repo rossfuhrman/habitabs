@@ -12,10 +12,10 @@ class HabitsController < ApplicationController
     #this includes all of the marks
     #so after a year or two of marks 
     #it could become a problem :(
-    @habits = Habit.where(user_id: current_user.id).includes(:marks).order(:position)
+    @habits = current_user.habits.includes(:marks).order(:position)
     @measured_habits = MeasuredHabit.where(user_id: current_user.id).includes(:measurements).order(:position)
     @date_range = get_date_range
-    @journal_entries = Journal.where(user_id: current_user.id).where('date <= ?', @date_range.days.last.date).where('date >= ?', @date_range.days.first.date)
+    @journal_entries = current_user.journals.where('date <= ?', @date_range.days.last.date).where('date >= ?', @date_range.days.first.date)
     @start_date_for_previous_link = get_start_date_for_previous_week_link @date_range
     @start_date_for_next_link = get_start_date_for_next_link @date_range
     get_mark_total_for_each_day
@@ -125,7 +125,7 @@ class HabitsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_habit
-      @habit = Habit.find(params[:id])
+      @habit = current_user.habits.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

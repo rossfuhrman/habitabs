@@ -64,6 +64,14 @@ describe MeasuredHabitsController do
     end
   end
   describe "DELETE destroy" do
+
+    it "raises error when trying to delete someone else's habit" do
+      other_users_measured_habit = FactoryGirl.create(:other_users_measured_habit)
+      expect {
+        delete :destroy, {:id => other_users_measured_habit.to_param}
+      }.to raise_error ActiveRecord::RecordNotFound
+    end
+
     it "destroys the requested measured habit" do
       expect {
         delete :destroy, {:id => @measured_habit.to_param}
