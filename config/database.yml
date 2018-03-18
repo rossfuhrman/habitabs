@@ -1,11 +1,11 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: activities_development
+  database: habitabs_development
   pool: 5
   host: localhost 
-  username: ross
-  password: password
+  username: <%= ENV['PG_USERNAME'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
   min_messages: warning
   reconnect: true 
 
@@ -16,9 +16,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: activities_test
+  database: habitabs_test
   pool: 5
-  username: ross
-  password: password
+  username: <%= ENV['PG_USERNAME'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
   min_messages: warning
   host: localhost
