@@ -3,7 +3,7 @@ ruby '2.4.1'
 
 gem 'rails', '~> 4.2'
 
-gem 'pg'
+gem 'pg', '~> 0.20'
 
 gem 'devise'
 
