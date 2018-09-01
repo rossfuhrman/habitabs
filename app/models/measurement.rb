@@ -1,3 +1,3 @@
-class Measurement < ActiveRecord::Base
+class Measurement < ApplicationRecord
   belongs_to :measured_habit 
 end

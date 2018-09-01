@@ -6,7 +6,7 @@ class MarkValidator < ActiveModel::Validator
   end
 end
 
-class Mark < ActiveRecord::Base
+class Mark < ApplicationRecord
   includes ActiveModel::Validations
   validates_with MarkValidator
   belongs_to :habit 

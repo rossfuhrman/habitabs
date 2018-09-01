@@ -19,7 +19,7 @@ feature 'journal' do
     expect(page).to have_content 'a journal entry'
 
     visit root_path
-    page.should have_css('.show-for-medium-up a[title="Edit Journal Entry"]', count: 1)
+    expect(page).to have_css('.show-for-medium-up a[title="Edit Journal Entry"]', count: 1)
   end
 
   #see the corresponding controller test
@@ -38,6 +38,6 @@ feature 'journal' do
     visit edit_journal_path(users_journal)
     fill_in 'journal_entry', with: 'New Updated Journal Entry'
     click_button 'Save'
-    page.should have_content 'New Updated Journal Entry'
+    expect(page).to have_content 'New Updated Journal Entry'
   end
 end

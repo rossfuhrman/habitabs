@@ -1,3 +1,3 @@
-class Journal < ActiveRecord::Base
+class Journal < ApplicationRecord
   belongs_to :user
 end

@@ -25,6 +25,6 @@ feature 'measured habits' do
     visit edit_measured_habit_path(users_measured_habit)
     fill_in 'Title', with: 'New Updated Text'
     click_button 'Save'
-    page.should have_content 'New Updated Text'
+    expect(page).to have_content 'New Updated Text'
   end
 end

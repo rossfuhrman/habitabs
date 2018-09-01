@@ -3,11 +3,11 @@ describe DateHelper do
   describe "a date" do
     it "knows if it is the current date" do
       date_helper = DateHelper.new(Date.today)
-      expect(date_helper.is_today?).to be_true
+      expect(date_helper.is_today?).to be_truthy
     end
     it "knows if it is in the future" do
       date_helper = DateHelper.new(Date.today + 1)
-      expect(date_helper.in_the_future?).to be_true
+      expect(date_helper.in_the_future?).to be_truthy
     end
     it "knows what its display class for the view is" do
       date_helper_today = DateHelper.new(Date.today)
