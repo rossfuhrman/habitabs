@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829170846) do
+ActiveRecord::Schema.define(version: 20180729213223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", force: true do |t|
+  create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -31,12 +30,11 @@ ActiveRecord::Schema.define(version: 20140829170846) do
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
-
-  create_table "habits", force: true do |t|
+  create_table "habits", force: :cascade do |t|
     t.string   "title"
     t.boolean  "private",     default: true
     t.datetime "created_at"
@@ -45,21 +43,20 @@ ActiveRecord::Schema.define(version: 20140829170846) do
     t.integer  "polarity",    default: 0
     t.text     "description"
     t.integer  "position"
+    t.boolean  "archived",    default: false
+    t.index ["user_id"], name: "index_habits_on_user_id", using: :btree
   end
 
-  add_index "habits", ["user_id"], name: "index_habits_on_user_id", using: :btree
-
-  create_table "journals", force: true do |t|
+  create_table "journals", force: :cascade do |t|
     t.text     "entry"
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.index ["user_id"], name: "index_journals_on_user_id", using: :btree
   end
 
-  add_index "journals", ["user_id"], name: "index_journals_on_user_id", using: :btree
-
-  create_table "marks", force: true do |t|
+  create_table "marks", force: :cascade do |t|
     t.date     "mark_date"
     t.integer  "count"
     t.integer  "habit_id"
@@ -67,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140829170846) do
     t.datetime "updated_at"
   end
 
-  create_table "measured_habits", force: true do |t|
+  create_table "measured_habits", force: :cascade do |t|
     t.string   "title"
     t.boolean  "private"
     t.integer  "polarity",         default: 0
@@ -77,22 +74,21 @@ ActiveRecord::Schema.define(version: 20140829170846) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "archived",         default: false
+    t.index ["user_id"], name: "index_measured_habits_on_user_id", using: :btree
   end
 
-  add_index "measured_habits", ["user_id"], name: "index_measured_habits_on_user_id", using: :btree
-
-  create_table "measurements", force: true do |t|
+  create_table "measurements", force: :cascade do |t|
     t.date     "measurement_date"
     t.decimal  "value",             precision: 10, scale: 4
     t.decimal  "decimal",           precision: 10, scale: 4
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "measured_habit_id"
+    t.index ["measured_habit_id"], name: "index_measurements_on_measured_habit_id", using: :btree
   end
 
-  add_index "measurements", ["measured_habit_id"], name: "index_measurements_on_measured_habit_id", using: :btree
-
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -105,9 +101,8 @@ ActiveRecord::Schema.define(version: 20140829170846) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

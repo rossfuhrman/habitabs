@@ -1,4 +1,4 @@
-class Habit < ActiveRecord::Base
+class Habit < ApplicationRecord
   validates_presence_of :title, :user
   belongs_to :user
   has_many :marks , :dependent => :destroy

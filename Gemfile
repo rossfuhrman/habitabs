@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.1'
 
-gem 'rails', '~> 4.2'
+gem 'rails', '5.0.7'
 
 gem 'pg', '~> 0.20'
 
@@ -10,13 +10,14 @@ gem 'devise'
 gem 'wicked'
 
 # Use SCSS for stylesheets
+gem 'sass', '3.4.25' # pinned to keep on a later version of foundation-rails - didn't really help
 gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'#, '~> 4.0.0'
 
 gem 'foundation-icons-sass-rails'
 
@@ -54,7 +55,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.14.0'
+  gem 'rspec-rails', '~> 3.5.0'
+  gem 'rspec-collection_matchers'
   gem 'rake', '< 11.0' #rspec-rails needs to be updated, but until then, pin the rake version
   gem 'factory_girl_rails', '~> 4.2.1'
   #There were install issues with these two gems when moving to ruby 2.2.1.

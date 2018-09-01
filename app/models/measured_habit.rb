@@ -1,4 +1,4 @@
-class MeasuredHabit < ActiveRecord::Base
+class MeasuredHabit < ApplicationRecord
   validates_presence_of :title, :user
   belongs_to :user
   has_many :measurements, :dependent => :destroy

@@ -3,12 +3,12 @@ require 'spec_helper'
 describe MeasuredHabit do
 	describe "#measurement_options" do
 		it "should not include 'Marks' option" do
-			expect(MeasuredHabit.measurement_options.include?("Marks")).to be_true
+			expect(MeasuredHabit.measurement_options.include?("Marks")).to be_truthy
 		end
 	end
   describe "#measurement_options_for_account_setup" do
 		it "should not include 'Marks' option" do
-			expect(MeasuredHabit.measurement_options_for_account_setup.include?("Marks")).to be_false
+			expect(MeasuredHabit.measurement_options_for_account_setup.include?("Marks")).to be_falsy
 		end
 	end
 	describe "#get_measurement_value" do
